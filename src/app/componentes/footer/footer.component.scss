@@ -1,0 +1,38 @@
+.footer {
+  font-family: 'PT Serif', serif;
+  font-size: 0.9rem;
+border-top: 4px solid #dc3545;
+}
+
+.footer a {
+  transition: color 0.3s ease;
+}
+
+.footer a:hover {
+  color: #ffc107; /* un dorado sutil */
+  text-decoration: none;
+}
+
+.medios-pago i,
+.medio-pago-logo {
+  transition: transform 0.2s ease;
+  vertical-align: middle;
+}
+
+/* Iconos SVG (Bootstrap) */
+.medios-pago i:hover {
+  color: #dc3545; /* rojo Francesca */
+  transform: scale(1.2);
+  cursor: default;
+}
+
+/* Imagenes (como la de Mercado Pago) */
+.medio-pago-logo {
+  height: 50px;
+  object-fit: contain;
+  cursor: default;
+}
+
+.medio-pago-logo:hover {
+  transform: scale(1.2);
+}

@@ -1,0 +1,123 @@
+<app-header
+  (toggleContactoEvent)="toggleContacto()"
+  (scrollTo)="scrollToSection($event)"
+  (toggleUbicacionEvent)="toggleUbicacion()"
+></app-header>
+<!-- Pasamos la variable contacto con @Input y escuchamos el evento cerrar -->
+<app-contacto
+  [mostrar]="contacto"
+  (cerrar)="onCerrarContacto()"
+  (mostrarUbicacion)="toggleUbicacion()"
+>
+</app-contacto>
+
+<app-ubicacion [mostrar]="ubicacion" (cerrar)="toggleUbicacion()">
+</app-ubicacion>
+
+<section class="hero d-flex align-items-center py-5 bg-light">
+  <img src="assets/badge.png" alt="15 años" class="badge-logo" />
+  <div>
+    <h2 class="title display-4 text-danger">
+      <strong>Francesca - Pasión por las pastas</strong>
+    </h2>
+    <p class="lead">
+      Elaboramos pastas frescas con ingredientes naturales y mucho amor.
+    </p>
+  </div>
+</section>
+
+<section id="productos" class="container py-5">
+  <h2>Productos destacados</h2>
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    <div class="col" *ngFor="let producto of productos">
+      <div class="card h-100">
+        <img
+          src="{{ producto.imagen }}"
+          class="card-img-top"
+          alt="{{ producto.nombre }}"
+        />
+        <div class="card-body">
+          <h5 class="card-title">{{ producto.nombre }}</h5>
+          <p class="card-text">{{ producto.descripcion }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="!mostrarProductos" class="text-center my-4">
+    <button class="btn btn-danger" (click)="abrirModalProductos()">
+      Ver todos los productos
+    </button>
+  </div>
+
+  <div *ngIf="mostrarProductos" class="fade-in">
+    <app-productos></app-productos>
+  </div>
+  <div *ngIf="mostrarProductos" class="text-center my-4">
+    <button
+      class="btn btn-danger cerrar-productos"
+      (click)="cerrarModalProductos()"
+    >
+      Cerrar productos
+    </button>
+  </div>
+</section>
+
+<section id="valores" class="bg-light py-5 text-center">
+  <div class="container">
+    <h2 class="text-danger mb-4">Nuestra calidad</h2>
+    <p class="lead text-muted">
+      Ingredientes frescos, producción artesanal y respeto por la tradición
+      italiana.
+    </p>
+    <div class="row mt-4">
+      <div class="col-md-4">
+        <i class="bi bi-basket text-success display-4 mb-3"></i>
+        <h5>Ingredientes naturales</h5>
+        <p class="text-muted">Usamos materias primas frescas y de calidad.</p>
+      </div>
+      <div class="col-md-4">
+        <i class="bi bi-emoji-heart-eyes text-danger display-4 mb-3"></i>
+        <h5>Hecho con amor</h5>
+        <p class="text-muted">
+          Cada pasta es elaborada con pasión y dedicación.
+        </p>
+      </div>
+      <div class="col-md-4">
+        <i class="bi bi-award text-warning display-4 mb-3"></i>
+        <h5>Tradición italiana</h5>
+        <p class="text-muted">
+          Respetamos recetas clásicas que atraviesan generaciones.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="quienes-somos" class="bg-white py-5">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-md-6 mb-4 mb-md-0">
+        <img
+          src="assets/texturaPapel.png"
+          alt="Nuestra historia"
+          class="img-fluid rounded shadow"
+        />
+      </div>
+      <div class="col-md-6">
+        <h2 class="text-danger mb-3">Quiénes somos</h2>
+        <p class="lead text-muted">
+          Francesca es una empresa familiar dedicada a la producción de pasta
+          artesanal.
+        </p>
+        <p class="text-muted">
+          Con más de 15 años de experiencia, nos enorgullece ofrecer productos
+          de alta calidad elaborados con ingredientes frescos y naturales.
+          Nuestra misión es brindar a cada familia el sabor de la tradición
+          italiana en su mesa.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<app-footer></app-footer>

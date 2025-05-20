@@ -1,1 +1,12 @@
-/* You can add global styles to this file, and also import other style files */
+body {
+  background: linear-gradient(to bottom, #ffecec69, #ffffff);
+
+  font-family: 'PT Serif', serif;
+
+}
+
+.modal.d-block {
+  display: block !important;
+  background-color: rgba(0,0,0,0.5);
+}
+

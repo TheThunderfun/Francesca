@@ -1,0 +1,53 @@
+<section
+  *ngIf="mostrar || animandoCerrar"
+  [ngClass]="{
+    'fade-in': mostrar && !animandoCerrar,
+    'fade-out': animandoCerrar
+  }"
+  class="contacto-overlay"
+>
+  <div
+    class="contacto-card container text-center p-4 position-relative"
+    [ngClass]="{
+      'zoom-in': mostrar && !animandoCerrar,
+      'zoom-out': animandoCerrar
+    }"
+  >
+    <button class="cerrar-btn" (click)="cerrarContacto()">×</button>
+
+    <h2 class="mb-4 text-danger">Contacto</h2>
+
+    <p class="fs-5">
+      📞 <strong>Teléfono:</strong>
+      <a href="tel:42055330" class="text-decoration-none text-success"
+        >+54 42055330</a
+      >
+    </p>
+
+    <p class="fs-5">
+      📷 <strong>Instagram:</strong>
+      <a
+        href="https://www.instagram.com/francescapasionporlaspastas/?hl=es"
+        target="_blank"
+        class="text-decoration-none text-danger"
+      >
+        Francesca Fábrica de pastas
+      </a>
+    </p>
+
+    <p class="fs-5">
+      🕒 <strong>Horario de atención:</strong>
+      <span class="text-danger">9 a 13 / 17 a 19hs.</span>
+    </p>
+
+    <p class="fs-5">
+      📍 <strong>Dirección:</strong>
+      <button
+        class="btn btn-link p-0 text-danger"
+        (click)="mostrarUbicacion.emit()"
+      >
+        Av. Manuel Belgrano 3311, Sarandí, Provincia de Buenos Aires
+      </button>
+    </p>
+  </div>
+</section>

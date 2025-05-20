@@ -1,0 +1,21 @@
+<section class="container py-5">
+  <h2>Productos y sus gustos</h2>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Categoría</th>
+        <th>Gustos</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let producto of productos">
+        <td>{{ producto.categoria }}</td>
+        <td>
+          <ng-container *ngFor="let gusto of producto.gustos">
+            <span class="gusto-chip">{{ gusto }}</span>
+          </ng-container>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</section>
