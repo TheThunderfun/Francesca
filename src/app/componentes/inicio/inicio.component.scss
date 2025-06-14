@@ -4,13 +4,24 @@
   object-fit: cover; /* La imagen se recorta si es necesario, para llenar el área */
 }
 
-.tittle{
-  font-family: 'Italianno', cursive;
-  font-size: 6rem;
+.imagenFondo {
+  background-image: url('https://elcordillerano1.cdn.net.ar/252/elcordillerano/images/01/64/70/1647035_02eab78a50a91c3eb8c375d4b171f88cb68eec99f3b66e98022e60843901fe3e/md.webp');
+  background-size: cover;
+  background-position: center;
+  height: 40vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-
-
+.title{
+  font-family: 'Italianno', cursive;
+  font-size: 8rem;
+  font-weight: bold;
+  color: #fff;  
+  text-shadow: 2px 2px 4px rgba(65, 59, 59, 0.972);
+  text-align: center;
+}
 
 .cerrar-productos {
   filter: brightness(0.9);
@@ -59,8 +70,42 @@
   padding-left: 2rem;
 }
 
+
+
+.section-shadow {
+border-top: 12px solid #dc3545;
+
+}
+
+.bg-alt {
+  background-color: #fdf4f5; /* un tono pastel rosado suave */
+}
+
+/* Separador visual entre secciones */
+// .section-divider {
+//   height: 20px;
+//   background: linear-gradient(to right, #e0e0e0 25%, transparent 25%, transparent 75%, #e0e0e0 75%);
+//   background-size: 20px 2px;
+//   background-repeat: repeat-x;
+//   margin-top: -1rem;
+//   margin-bottom: -1rem;
+// }
+
+/* Mejora general a todas las secciones */
+
+
 .badge-logo {
-  max-height: 200px;
-  margin-left: 0;
+  max-height: 180px;
   flex-shrink: 0;
+}
+
+@media (max-width: 576px) {
+  .badge-logo {
+    max-height: 150px;
+    margin: 0 auto 1rem;
+  }
+  .hero {
+    padding-left: 1rem;
+    flex-direction: column !important;
+  }
 }

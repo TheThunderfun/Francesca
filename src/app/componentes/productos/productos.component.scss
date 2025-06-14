@@ -1,41 +1,31 @@
-.table {
-  border-collapse: separate;
-  border-spacing: 0 0.5rem; /* separa filas */
+.producto-row {
+  border-bottom: 1px solid #eaeaea;
 }
 
-.table-striped tbody tr:nth-child(odd) {
-  background-color: #f9f9f9; /* más suave que gris fuerte */
-}
-
-.gustos-list {
-  list-style: none;
-  padding-left: 0;
-  margin-bottom: 0;
-  max-height: 120px; /* limita la altura */
-  overflow-y: auto;
-}
-
-.gustos-list li {
-  padding: 0.15rem 0;
-  border-bottom: 1px solid #000000;
-}
-
+/* Chips de gustos */
 .gusto-chip {
   display: inline-block;
-  background-color: #ffffff; /* rojo Francesca, pero plano */
-  color: #000000;
-  border-radius: 15px;
+  background-color: #fff;
+  color: #a8282f;
+  border: 1px solid #a8282f;
+  border-radius: 20px;
   padding: 5px 12px;
-  margin: 3px 6px 3px 0;
+  margin: 4px 6px 4px 0;
   font-size: 0.9rem;
-  font-weight: bold;
-  box-shadow: none; /* sin sombra para no brillar */
-  cursor: default;
-  user-select: none;
+  font-weight: 500;
   white-space: nowrap;
-  transition: background-color 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 .gusto-chip:hover {
-  background-color: #a8282f; /* rojo más oscuro para el hover */
+  background-color: #a8282f;
+  color: #fff;
+  cursor: default;
+}
+
+@media (max-width: 576px) {
+  .gusto-chip {
+    font-size: 0.8rem;
+    padding: 4px 10px;
+  }
 }
