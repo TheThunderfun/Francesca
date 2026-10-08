@@ -27,4 +27,5 @@ descargadas y convertidas a WebP/JPG para servirlas localmente. Los derechos son
 
 | Archivo | Origen |
 |---|---|
+| ravioles-a-mano.webp | Versión de mayor calidad de la foto de ravioles de Instagram (https://www.instagram.com/p/DX4KqFCjZj0/), entregada directamente (oct. 2026). Reemplaza a `instagram-ravioles-a-mano.webp`, que quedó sin uso. |
 | sorrentinos.webp | Entregada directamente para reemplazar la foto de sorrentinos (oct. 2026). TODO(cliente): registrar autor o fuente y confirmar que es una foto de Francesca o de uso libre. Reemplaza a `instagram-sorrentinos.jpg`, que quedó sin uso. |

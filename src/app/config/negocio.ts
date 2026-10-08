@@ -22,7 +22,6 @@ export const NEGOCIO = {
 
   instagram: 'https://www.instagram.com/francescapasionporlaspastas/',
   instagramUsuario: '@francescapasionporlaspastas',
-  facebook: 'https://www.facebook.com/profile.php?id=100063466961888',
   mapaLink: 'https://www.google.com/maps?q=Av.+Manuel+Belgrano+3311,+Sarand%C3%AD',
   mapaEmbed:
     'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3280.788194537277!2d-58.34834272493904!3d-34.6852947618098!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95a3331e4bb62699%3A0x96d0e25318523e59!2sAv.%20Manuel%20Belgrano%203311%2C%20B1872FVM%20Sarand%C3%AD%2C%20Provincia%20de%20Buenos%20Aires!5e0!3m2!1ses-419!2sar!4v1747509257968!5m2!1ses-419!2sar',
