@@ -191,7 +191,7 @@ La **franja tricolore** (`regla-tricolore`, 12px: verde bandera, blanco puro, ro
 Barra fija blanca al 96% con borde inferior; marca en Young Serif verde. En escritorio enlaces píldora con hover verde pálido y CTA rojo; en celular botón circular de 48px y menú desplegable con enlaces separados por filetes y CTA al pie.
 
 ### Chips de gusto
-Píldora blanca, borde verde marca de 1px, texto verde onda. Estáticos: no son controles.
+Píldora blanca, borde verde marca de 1px, texto verde onda. Son enlaces: cada gusto abre un pedido por WhatsApp con el producto precargado. Alto mínimo de 44px; hover y foco en verde marca con texto blanco.
 
 ### Lista de familias
 Acordeón tipográfico: filete superior de 2px verde marca, nombre en Young Serif verde, cuenta en tinta 2 y círculo con `+` que gira 45° al abrir.

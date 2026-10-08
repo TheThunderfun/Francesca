@@ -15,7 +15,7 @@
           <app-icono class="familia-icono" nombre="mas"></app-icono>
         </summary>
         <ul class="gustos-chips">
-          <li *ngFor="let gusto of p.gustos">{{ gusto }}</li>
+          <li *ngFor="let gusto of p.gustos"><a class="gusto" [href]="pedirHref(p.categoria, gusto)" [attr.target]="pedido.esWhatsapp ? '_blank' : null" rel="noopener noreferrer" [attr.aria-label]="'Pedir ' + p.categoria + ' ' + gusto + (pedido.esWhatsapp ? ' por WhatsApp' : ' por teléfono')">{{ gusto }}</a></li>
         </ul>
       </details>
     </div>

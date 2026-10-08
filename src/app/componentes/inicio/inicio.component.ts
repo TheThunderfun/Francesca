@@ -15,6 +15,7 @@ interface Producto {
   imagen: string;
   alt: string;
   publicacion: string;
+  pedido: string;
 }
 
 interface Diferencial {
@@ -51,34 +52,6 @@ export class InicioComponent implements OnInit, AfterViewInit, OnDestroy {
   // Fotos reales de Instagram. Descripciones: textos de las propias publicaciones.
   readonly productos: Producto[] = [
     {
-      nombre: 'Sorrentinos',
-      descripcion: 'Frescos, hechos en el día.',
-      imagen: 'assets/instagram-sorrentinos.jpg',
-      alt: 'Plato con siete sorrentinos frescos bañados en salsa de tomate',
-      publicacion: 'https://www.instagram.com/p/Das8_hnMm2v/',
-    },
-    {
-      nombre: 'Ñoquis de calabaza',
-      descripcion: 'Naturales, sin colorantes ni conservantes. Hechos en el momento.',
-      imagen: 'assets/instagram-nioquis-calabaza.webp',
-      alt: 'Ñoquis de calabaza espolvoreados con harina sobre una mesada de mármol',
-      publicacion: 'https://www.instagram.com/p/DY7zUYlMgs_/',
-    },
-    {
-      nombre: 'Canelones caseros',
-      descripcion: 'De suprema de pollo y verdura, hechos con panqueques. Los hacemos a pedido.',
-      imagen: 'assets/instagram-canelones.webp',
-      alt: 'Canelones de pollo y verdura con salsa y queso rallado en bandejas',
-      publicacion: 'https://www.instagram.com/p/DYhH3ygpgvI/',
-    },
-    {
-      nombre: 'Ñoquis de papa rellenos de muzzarella',
-      descripcion: 'Ñoquis de papa frescos, con corazón de muzzarella.',
-      imagen: 'assets/instagram-nioquis-papa.jpg',
-      alt: 'Ñoquis de papa enharinados, apilados sobre una mesada blanca',
-      publicacion: 'https://www.instagram.com/p/DZkPlYJNMsV/',
-    },
-    {
       // TODO(cliente): la publicación de Instagram dice "trucha salmonada" pero la foto
       // muestra raviolones con langostinos. Se muestra un texto neutro hasta confirmar
       // el relleno real o cambiar la foto.
@@ -87,6 +60,39 @@ export class InicioComponent implements OnInit, AfterViewInit, OnDestroy {
       imagen: 'assets/instagram-raviolones.jpg',
       alt: 'Raviolones con salsa cremosa y langostinos sobre un plato negro',
       publicacion: 'https://www.instagram.com/p/DdzwPxSN_9s/',
+      pedido: 'Raviolones',
+    },
+    {
+      nombre: 'Sorrentinos',
+      descripcion: 'Frescos, hechos en el día.',
+      imagen: 'assets/sorrentinos.webp',
+      alt: 'Sorrentinos frescos enharinados, apilados sobre una mesada de mármol',
+      publicacion: 'https://www.instagram.com/p/Das8_hnMm2v/',
+      pedido: 'Sorrentinos',
+    },
+    {
+      nombre: 'Ñoquis de calabaza',
+      descripcion: 'Naturales, sin colorantes ni conservantes. Hechos en el momento.',
+      imagen: 'assets/instagram-nioquis-calabaza.webp',
+      alt: 'Ñoquis de calabaza espolvoreados con harina sobre una mesada de mármol',
+      publicacion: 'https://www.instagram.com/p/DY7zUYlMgs_/',
+      pedido: 'Ñoquis de calabaza',
+    },
+    {
+      nombre: 'Canelones caseros',
+      descripcion: 'De suprema de pollo y verdura, hechos con panqueques. Los hacemos a pedido.',
+      imagen: 'assets/instagram-canelones.webp',
+      alt: 'Canelones de pollo y verdura con salsa y queso rallado en bandejas',
+      publicacion: 'https://www.instagram.com/p/DYhH3ygpgvI/',
+      pedido: 'Canelones',
+    },
+    {
+      nombre: 'Ñoquis de papa rellenos de muzzarella',
+      descripcion: 'Ñoquis de papa frescos, con corazón de muzzarella.',
+      imagen: 'assets/instagram-nioquis-papa.jpg',
+      alt: 'Ñoquis de papa enharinados, apilados sobre una mesada blanca',
+      publicacion: 'https://www.instagram.com/p/DZkPlYJNMsV/',
+      pedido: 'Ñoquis de papa',
     },
   ];
 

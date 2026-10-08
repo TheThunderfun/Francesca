@@ -22,3 +22,9 @@ descargadas y convertidas a WebP/JPG para servirlas localmente. Los derechos son
 | hero-pasta-fresca.jpg | Pexels, foto n.º 6287448 (https://www.pexels.com/photo/6287448/). Licencia de Pexels: uso comercial libre, sin atribución obligatoria. Es una foto de stock: no muestra producto de Francesca. TODO(cliente): reemplazar por una foto propia de la fábrica cuando haya una buena. |
 
 `instagram-hero-sorrentinos.webp` quedó sin uso en la página tras este cambio.
+
+## Foto aportada por el dueño del sitio
+
+| Archivo | Origen |
+|---|---|
+| sorrentinos.webp | Entregada directamente para reemplazar la foto de sorrentinos (oct. 2026). TODO(cliente): registrar autor o fuente y confirmar que es una foto de Francesca o de uso libre. Reemplaza a `instagram-sorrentinos.jpg`, que quedó sin uso. |

@@ -1,6 +1,7 @@
 import { NgFor } from '@angular/common';
 import { Component } from '@angular/core';
 import { IconoComponent } from '../icono/icono.component';
+import { NEGOCIO, pedido } from '../../config/negocio';
 
 interface ProductoTabla {
   categoria: string;
@@ -17,6 +18,7 @@ export class ProductosComponent {
   // Cada familia se abre con un toque, para no obligar a un scroll interminable.
   // En escritorio se abren las primeras tres; el resto, con un toque.
   readonly escritorio = window.matchMedia('(min-width: 768px)').matches;
+  readonly pedido = pedido;
 
   readonly productos: ProductoTabla[] = [
     {
@@ -102,4 +104,14 @@ export class ProductosComponent {
       ],
     },
   ];
+
+  // Cada gusto abre el pedido con el producto precargado (WhatsApp, o llamada si no hay número).
+  pedirHref(categoria: string, gusto: string): string {
+    const producto = categoria === 'Especiales por semana' ? gusto : `${categoria} (${gusto})`;
+    if (pedido.esWhatsapp) {
+      const texto = `Hola! Quiero pedir ${producto} para retirar por el local.`;
+      return `https://wa.me/${NEGOCIO.whatsapp}?text=${encodeURIComponent(texto)}`;
+    }
+    return pedido.href;
+  }
 }

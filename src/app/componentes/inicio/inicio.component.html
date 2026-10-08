@@ -26,7 +26,7 @@
     </div>
     <div class="hero-panel">
       <div class="hero-contenido">
-        <h1 class="hero-titulo">Pasta fresca de Sarandí, hecha en familia.</h1>
+        <h1 class="hero-titulo">Pasta fresca todos los días.</h1>
         <p class="hero-bajada">
           Sorrentinos, ravioles, ñoquis, canelones y más. Los hacemos en nuestra fábrica de
           {{ negocio.direccion }}.
@@ -69,7 +69,7 @@
             <p class="pasta-texto">{{ p.descripcion }}</p>
             <a
               class="btn btn-contorno pasta-pedir"
-              [href]="pedirHref(p.nombre)"
+              [href]="pedirHref(p.pedido)"
               [attr.target]="pedido.esWhatsapp ? '_blank' : null"
               rel="noopener noreferrer"
             >

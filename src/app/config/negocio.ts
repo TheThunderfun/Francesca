@@ -7,6 +7,7 @@
 export const NEGOCIO = {
   nombre: 'Francesca',
   descriptor: 'Fábrica de pastas',
+  eslogan: 'Pasión por las pastas',
   direccion: 'Av. Manuel Belgrano 3311',
   localidad: 'Sarandí, Provincia de Buenos Aires',
   codigoPostal: 'B1872FVM',
@@ -41,28 +42,32 @@ export const pedido = {
 
 // ---------- Horarios ----------
 // Clave = día de la semana (0 domingo … 6 sábado). Valor = franjas [desde, hasta) en horas.
-// TODO(cliente): confirmar que el lunes está cerrado (se deduce de "martes a sábado").
+// Fuente: Google Maps (oct. 2026). Lunes figura cerrado, pero Maps lo marcó con "los horarios pueden variar" por un feriado: confirmar con el cliente.
 export const FRANJAS: Record<number, [number, number][]> = {
   0: [[9, 13]],
   1: [],
-  2: [[9, 13], [17, 19]],
-  3: [[9, 13], [17, 19]],
-  4: [[9, 13], [17, 19]],
-  5: [[9, 13], [17, 19]],
+  2: [[9, 13], [17, 19.5]],
+  3: [[9, 13], [17, 19.5]],
+  4: [[9, 13], [17, 19.5]],
+  5: [[9, 13], [17, 19.5]],
   6: [[9, 13], [17, 19]],
 };
 
 export const DIAS = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
 
+/** Horas decimales a texto: 19.5 -> "19:30". */
+const hm = (h: number) => (Number.isInteger(h) ? `${h}` : `${Math.floor(h)}:${String(Math.round((h % 1) * 60)).padStart(2, '0')}`);
+
 export function textoFranjas(dia: number): string {
   const f = FRANJAS[dia];
-  return f.length ? f.map(([a, b]) => `${a} a ${b} h`).join(' y ') : 'Cerrado';
+  return f.length ? f.map(([a, b]) => `${hm(a)} a ${hm(b)} h`).join(' y ') : 'Cerrado';
 }
 
 /** Filas para la tabla: agrupa los días con el mismo horario. */
 export const HORARIOS_TABLA: { dias: string; horas: string; indices: number[] }[] = [
   { dias: 'Lunes', horas: textoFranjas(1), indices: [1] },
-  { dias: 'Martes a sábado', horas: textoFranjas(2), indices: [2, 3, 4, 5, 6] },
+  { dias: 'Martes a viernes', horas: textoFranjas(2), indices: [2, 3, 4, 5] },
+  { dias: 'Sábado', horas: textoFranjas(6), indices: [6] },
   { dias: 'Domingo', horas: textoFranjas(0), indices: [0] },
 ];
 
@@ -72,7 +77,7 @@ export interface EstadoLocal {
   hoy: number;
 }
 
-const hora = (h: number) => `${h} h`;
+const hora = (h: number) => `${hm(h)} h`;
 
 /** Estado en vivo del local según la hora de Buenos Aires. */
 export function estadoDelLocal(ahora: Date = new Date()): EstadoLocal {
