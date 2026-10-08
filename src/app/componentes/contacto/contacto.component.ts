@@ -1,26 +1,17 @@
-import { CommonModule } from '@angular/common';
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component } from '@angular/core';
+import { NEGOCIO, pedido } from '../../config/negocio';
+import { IconoComponent } from '../icono/icono.component';
 
+// Antes era un overlay modal. Ahora es el cierre de la página: la llamada
+// final a hacer el pedido, con todas las vías de contacto a la vista.
 @Component({
   selector: 'app-contacto',
   standalone: true,
-  imports: [CommonModule],
+  imports: [IconoComponent],
   templateUrl: './contacto.component.html',
   styleUrls: ['./contacto.component.scss'],
 })
 export class ContactoComponent {
-  @Input() mostrar = false;
-  @Output() cerrar = new EventEmitter<void>();
-  @Output() mostrarUbicacion = new EventEmitter<void>();
-
-  animandoCerrar = false;
-
-  cerrarContacto() {
-    this.animandoCerrar = true;
-    // Esperamos el tiempo de la animación y luego emitimos el evento cerrar
-    setTimeout(() => {
-      this.cerrar.emit();
-      this.animandoCerrar = false;
-    }, 300); // Debe coincidir con la duración de la animación CSS
-  }
+  readonly negocio = NEGOCIO;
+  readonly pedido = pedido;
 }

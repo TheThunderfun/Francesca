@@ -1,142 +1,163 @@
-<app-header
-  (toggleContactoEvent)="toggleContacto()"
-  (scrollTo)="scrollToSection($event)"
-  (toggleUbicacionEvent)="toggleUbicacion()"
-></app-header>
+<app-header></app-header>
 
-<app-contacto
-  [mostrar]="contacto"
-  (cerrar)="onCerrarContacto()"
-  (mostrarUbicacion)="toggleUbicacion()"
-></app-contacto>
-
-<app-ubicacion
-  [mostrar]="ubicacion"
-  (cerrar)="toggleUbicacion()"
-></app-ubicacion>
-
-<!-- HERO -->
-<section
-  class="hero d-flex flex-column flex-md-row align-items-center justify-content-center py-4 py-md-5 bg-light imagenFondo"
->
-  <img
-    src="assets/badge.png"
-    alt="15 años"
-    class="badge-logo img-fluid me-md-4 mb-3 mb-md-0"
-  />
-  <div class="text-center text-md-start">
-    <h2 class="title display-5 display-md-4">
-      <strong>Francesca - Pasión por las Pastas</strong>
-    </h2>
-    <p class="lead">
-      Elaboramos pastas frescas con ingredientes naturales y mucho amor.
-    </p>
-  </div>
-</section>
-
-<!-- VALORES -->
-<div class="section-shadow"></div>
-<!-- PRODUCTOS -->
-<section id="productos" class="bg-alt py-5 text-center">
-  <div class="container">
-    <h2 class="text-danger mb-4 fw-bold">Nuestros productos</h2>
-    <div class="row row-cols-1 row-cols-md-3 g-4">
-      <div class="col" *ngFor="let producto of productos">
-        <div class="card h-100">
-          <img
-            src="{{ producto.imagen }}"
-            class="card-img-top"
-            alt="{{ producto.nombre }}"
-          />
-          <div class="card-body">
-            <h5 class="card-title text-muted fw-bold">{{ producto.nombre }}</h5>
-            <p class="card-text">{{ producto.descripcion }}</p>
-          </div>
+<main>
+  <!-- HERO -->
+  <section id="inicio" class="hero">
+    <div class="hero-foto">
+      <img
+        src="assets/hero-pasta-fresca.jpg"
+        alt="Manos formando nidos de tallarines frescos sobre una mesada enharinada"
+        width="1600"
+        height="1067"
+        fetchpriority="high"
+      />
+    </div>
+    <!-- Sello con el logo: el anillo de texto gira solo, el logo hace una vuelta al entrar y otra al pasar el mouse. -->
+    <div class="sello" aria-hidden="true">
+      <svg class="sello-anillo" viewBox="0 0 200 200" focusable="false">
+        <defs>
+          <path id="sello-circulo" d="M100,100 m-80,0 a80,80 0 1,1 160,0 a80,80 0 1,1 -160,0" />
+        </defs>
+        <text>
+          <textPath href="#sello-circulo" textLength="500">FÁBRICA DE PASTAS · SARANDÍ · HECHA EN FAMILIA ·</textPath>
+        </text>
+      </svg>
+      <img class="sello-logo" src="assets/logo-192.png" alt="" width="192" height="192" />
+    </div>
+    <div class="hero-panel">
+      <div class="hero-contenido">
+        <h1 class="hero-titulo">Pasta fresca de Sarandí, hecha en familia.</h1>
+        <p class="hero-bajada">
+          Sorrentinos, ravioles, ñoquis, canelones y más. Los hacemos en nuestra fábrica de
+          {{ negocio.direccion }}.
+        </p>
+        <p class="estado-local sobre-verde" [class.abierto]="estado.abierto" role="status">{{ estado.texto }}</p>
+        <div class="hero-acciones">
+          <a class="btn btn-accion btn-lg" [href]="pedido.href" [attr.target]="pedido.esWhatsapp ? '_blank' : null" rel="noopener noreferrer">
+            <app-icono [nombre]="pedido.esWhatsapp ? 'whatsapp' : 'telefono'"></app-icono>
+            {{ pedido.etiquetaLarga }}
+          </a>
+          <a class="btn btn-claro btn-lg" [href]="'tel:' + negocio.telefonoLink">
+            <app-icono nombre="telefono"></app-icono>
+            Llamar · {{ negocio.telefonoVisible }}
+          </a>
         </div>
-      </div>
-    </div>
-
-    <div *ngIf="!mostrarProductos" class="text-center my-4">
-      <button class="btn btn-danger" (click)="abrirModalProductos()">
-        Ver todos los productos
-      </button>
-    </div>
-
-    <div *ngIf="mostrarProductos" class="fade-in">
-      <app-productos></app-productos>
-    </div>
-
-    <div *ngIf="mostrarProductos" class="text-center my-4">
-      <button
-        class="btn btn-danger cerrar-productos"
-        (click)="cerrarModalProductos()"
-      >
-        Cerrar productos
-      </button>
-    </div>
-  </div>
-</section>
-
-<div class="section-shadow"></div>
-
-<section id="valores" class="bg-white py-5 text-center mt-5 mb-5">
-  <div class="container">
-    <h1 class="text-danger mb-4 fw-bold">Nuestra calidad</h1>
-    <p class="lead text-muted fw-bold">
-      Ingredientes frescos, producción artesanal y respeto por la tradición
-      italiana.
-    </p>
-    <div class="row mt-4">
-      <div class="col-md-4">
-        <i class="bi bi-basket text-success display-4 mb-3"></i>
-        <h5>Ingredientes naturales</h5>
-        <p class="text-muted">Usamos materias primas frescas y de calidad.</p>
-      </div>
-      <div class="col-md-4">
-        <i class="bi bi-emoji-heart-eyes text-danger display-4 mb-3"></i>
-        <h5>Hecho con amor</h5>
-        <p class="text-muted">
-          Cada pasta es elaborada con pasión y dedicación.
-        </p>
-      </div>
-      <div class="col-md-4">
-        <i class="bi bi-award text-warning display-4 mb-3"></i>
-        <h5>Tradición italiana</h5>
-        <p class="text-muted">
-          Respetamos recetas clásicas que atraviesan generaciones.
+        <p class="hero-ver-pastas">
+          <a class="enlace-dato" href="#pastas" (click)="ir($event, 'pastas')">Ver nuestras pastas</a>
         </p>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- QUIÉNES SOMOS -->
-<div class="section-shadow"></div>
-<section id="quienes-somos" class="bg-white py-5 mt-5 mb-5">
-  <div class="container">
-    <div class="row align-items-center">
-      <div class="col-md-6 mb-4 mb-md-0">
+  <hr class="regla-tricolore" />
+
+  <!-- PASTAS DESTACADAS -->
+  <section id="pastas" class="seccion pastas">
+    <div class="contenedor">
+      <div class="pastas-intro reveal">
+        <h2 class="titulo-seccion texto-marca">Lo que sale de nuestra mesada</h2>
+        <p class="bajada">Pasta fresca para cocinar en casa. Fotos reales de lo que hacemos todos los días.</p>
+      </div>
+
+      <div class="pastas-grilla">
+        <figure class="pasta" *ngFor="let p of productos; let i = index">
+          <div class="pasta-foto reveal-wipe" [style.--i]="i">
+            <img [src]="p.imagen" [alt]="p.alt" width="1080" height="1080" loading="lazy" decoding="async" />
+          </div>
+          <figcaption class="reveal" [style.--i]="i">
+            <h3 class="pasta-nombre">{{ p.nombre }}</h3>
+            <p class="pasta-texto">{{ p.descripcion }}</p>
+            <a
+              class="btn btn-contorno pasta-pedir"
+              [href]="pedirHref(p.nombre)"
+              [attr.target]="pedido.esWhatsapp ? '_blank' : null"
+              rel="noopener noreferrer"
+            >
+              <app-icono [nombre]="pedido.esWhatsapp ? 'whatsapp' : 'telefono'"></app-icono>
+              Pedir este<span class="visually-hidden"> : {{ p.nombre }}</span>
+            </a>
+          </figcaption>
+        </figure>
+      </div>
+      <p class="pastas-mas reveal">
+        <a class="enlace-dato" [href]="negocio.instagram" target="_blank" rel="noopener noreferrer">
+          Más pastas en Instagram <app-icono nombre="flecha"></app-icono>
+        </a>
+      </p>
+    </div>
+  </section>
+
+  <!-- TODOS LOS GUSTOS -->
+  <app-productos></app-productos>
+
+  <!-- NUESTRA HISTORIA -->
+  <section id="historia" class="seccion historia">
+    <div class="contenedor historia-grilla">
+      <figure class="historia-foto reveal-wipe">
+        <!-- FOTO PENDIENTE (opcional): sumar una foto del local o del equipo trabajando junto a esta. -->
         <img
-          src="assets/texturaPapel.png"
-          alt="Nuestra historia"
-          class="img-fluid rounded shadow"
+          src="assets/instagram-ravioles-a-mano.webp"
+          alt="Plancha de ravioles recién cortados sobre la mesada, con un palo de amasar de madera al costado"
+          width="1080"
+          height="1080"
+          loading="lazy"
+          decoding="async"
         />
-      </div>
-      <div class="col-md-6">
-        <h2 class="text-danger mb-3 fw-bold">Quiénes somos</h2>
-        <p class="lead text-muted">
-          Francesca es una empresa familiar dedicada a la producción de pasta
-          artesanal.
+      </figure>
+      <div class="historia-texto reveal">
+        <h2 class="titulo-seccion texto-marca">Una fábrica de barrio, con las manos en la masa.</h2>
+        <p class="bajada">
+          Somos una fábrica familiar de pastas de Sarandí. Hace más de 15 años trabajamos cerca de nuestros vecinos.
         </p>
-        <p class="text-muted">
-          Con más de 15 años de experiencia, nos enorgullece ofrecer productos
-          de alta calidad elaborados con ingredientes frescos y naturales.
-          Nuestra misión es brindar a cada familia el sabor de la tradición
-          italiana en su mesa.
+        <p class="historia-parrafo">
+          Cada día preparamos pastas frescas con ingredientes seleccionados y recetas que ya son parte de muchas mesas de
+          la zona. Nuestros ravioles los cortamos a mano, con una ruedita de las que usaban las abuelas.
         </p>
+        <a class="enlace-dato" [href]="negocio.instagram" target="_blank" rel="noopener noreferrer">
+          Mirá cómo trabajamos en Instagram <app-icono nombre="flecha"></app-icono>
+        </a>
       </div>
     </div>
-  </div>
-</section>
+  </section>
+
+  <!-- DIFERENCIALES -->
+  <section id="diferenciales" class="seccion diferenciales sobre-verde">
+    <div class="contenedor diferenciales-grilla">
+      <h2 class="titulo-seccion reveal">Por qué volvés a Francesca.</h2>
+      <ul class="diferenciales-lista">
+        <li class="reveal" *ngFor="let d of diferenciales; let i = index" [style.--i]="i">
+          <h3 class="diferencial-titulo">{{ d.titulo }}</h3>
+          <p class="diferencial-texto">{{ d.texto }}</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- RESEÑAS DE GOOGLE -->
+  <app-resenas></app-resenas>
+
+  <!-- UBICACIÓN, HORARIOS Y MODALIDAD -->
+  <app-ubicacion [estado]="estado"></app-ubicacion>
+
+  <!-- CIERRE -->
+  <app-contacto></app-contacto>
+</main>
 
 <app-footer></app-footer>
+
+<!-- Barra de acción fija, sólo en celular -->
+<!-- Sin WhatsApp cargado, "pedir" y "llamar" son la misma acción: un solo botón. -->
+<div class="barra-movil" [class.barra-simple]="!pedido.esWhatsapp">
+  @if (pedido.esWhatsapp) {
+    <a class="btn btn-contorno" [href]="'tel:' + negocio.telefonoLink">
+      <app-icono nombre="telefono"></app-icono> Llamar · {{ negocio.telefonoVisible }}
+    </a>
+    <a class="btn btn-accion" [href]="pedido.href" target="_blank" rel="noopener noreferrer">
+      <app-icono nombre="whatsapp"></app-icono> {{ pedido.etiquetaCorta }}
+    </a>
+  } @else {
+    <a class="btn btn-accion" [href]="pedido.href">
+      <app-icono nombre="telefono"></app-icono> Llamar · {{ negocio.telefonoVisible }}
+    </a>
+  }
+</div>

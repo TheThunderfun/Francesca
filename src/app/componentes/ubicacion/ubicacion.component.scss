@@ -1,72 +1,47 @@
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+.donde { background: var(--it-papel); }
+.donde-grilla { display: grid; gap: 2.5rem; }
+
+.direccion { margin: 1.75rem 0 1.25rem; font-style: normal; }
+.direccion-calle { display: block; font-family: var(--it-fuente-titulo); font-size: clamp(1.6rem, 4vw, 2.2rem); line-height: 1.15; color: var(--it-tinta); }
+.direccion-zona { display: block; margin-top: 0.2rem; color: var(--it-tinta-2); }
+
+.donde-acciones { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-bottom: 2.25rem; }
+
+.subtitulo { margin: 2rem 0 0.75rem; font-family: var(--it-fuente-titulo); font-size: 1.4rem; color: var(--it-verde-texto); }
+.donde .estado-local { margin-bottom: 0.75rem; color: var(--it-tinta); }
+
+.horarios { margin: 0; max-width: 26rem; }
+.horario-fila {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.7rem 0.75rem;
+  border-bottom: 1px solid var(--it-borde);
+  dt { font-weight: 500; }
+  dd { margin: 0; font-weight: 700; text-align: right; }
 }
-@keyframes fadeOut {
-  from { opacity: 1; }
-  to { opacity: 0; }
-}
-@keyframes zoomIn {
-  from { transform: scale(0.8); opacity: 0; }
-  to { transform: scale(1); opacity: 1; }
-}
-@keyframes zoomOut {
-  from { transform: scale(1); opacity: 1; }
-  to { transform: scale(0.8); opacity: 0; }
+/* El día de hoy se marca con fondo y peso, no sólo con color. */
+.horario-fila.hoy { background: var(--it-verde-pale); border-radius: 4px; border-bottom-color: transparent; }
+
+.modalidades {
+  display: grid;
+  gap: 0.6rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  li { display: flex; align-items: center; gap: 0.7rem; font-weight: 500; }
+  app-icono { color: var(--it-verde-texto); font-size: 1.3rem; }
 }
 
-.ubicacion-overlay {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background-color: rgba(0,0,0,0.5);
-  display: flex; justify-content: center; align-items: center;
-  padding: 1rem;
-  z-index: 1050;
-}
-
-.fade-in {
-  animation: fadeIn 0.3s forwards;
-}
-.fade-out {
-  animation: fadeOut 0.3s forwards;
-}
-
-.ubicacion-card {
-  background: white;
-  border-radius: 1rem;
-  max-width: 900px;
-  width: 100%;
-  box-shadow: 0 0 20px rgba(0,0,0,0.3);
-  position: relative;
+.donde-mapa {
   overflow: hidden;
+  border-radius: 4px;
+  min-height: 320px;
+  background: var(--it-papel-2);
+  iframe { display: block; width: 100%; height: 100%; min-height: 320px; border: 0; }
 }
 
-.zoom-in {
-  animation: zoomIn 0.3s forwards;
-}
-.zoom-out {
-  animation: zoomOut 0.3s forwards;
-}
-
-.cerrar-btn {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  background-color: #dc3545; /* Rojo fuerte */
-  border: none;
-  color: white;
-  font-size: 1.5rem;
-  width: 2.5rem;
-  height: 2.5rem;
-  border-radius: 50%;
-  cursor: pointer;
-  line-height: 1;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-  transition: background-color 0.2s, transform 0.2s;
-
-  &:hover {
-    background-color: #c82333;
-    transform: scale(1.1);
-  }
+@media (min-width: 992px) {
+  .donde-grilla { grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: clamp(3rem, 6vw, 5rem); align-items: stretch; }
+  .donde-mapa iframe { min-height: 560px; }
 }

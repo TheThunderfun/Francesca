@@ -1,85 +1,163 @@
-import { Component, Input, Output, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, NgZone, OnDestroy, OnInit } from '@angular/core';
+import { NgFor } from '@angular/common';
 import { HeaderComponent } from '../header/header.component';
 import { ContactoComponent } from '../contacto/contacto.component';
-import { CommonModule } from '@angular/common';
 import { UbicacionComponent } from '../ubicacion/ubicacion.component';
 import { FooterComponent } from '../footer/footer.component';
 import { ProductosComponent } from '../productos/productos.component';
+import { ResenasComponent } from '../resenas/resenas.component';
+import { EstadoLocal, NEGOCIO, estadoDelLocal, pedido } from '../../config/negocio';
+import { IconoComponent } from '../icono/icono.component';
 
 interface Producto {
   nombre: string;
   descripcion: string;
   imagen: string;
+  alt: string;
+  publicacion: string;
 }
+
+interface Diferencial {
+  titulo: string;
+  texto: string;
+}
+
 @Component({
   selector: 'app-inicio',
   imports: [
+    NgFor,
     HeaderComponent,
     ContactoComponent,
-    CommonModule,
     UbicacionComponent,
     FooterComponent,
     ProductosComponent,
-
+    ResenasComponent,
+    IconoComponent,
   ],
   standalone: true,
   templateUrl: './inicio.component.html',
   styleUrl: './inicio.component.scss',
 })
-export class InicioComponent {
-  contacto = false;
-  ubicacion = false;
-  mostrarProductos = false;
-  @ViewChild('inicio') inicioComponent!: InicioComponent;
+export class InicioComponent implements OnInit, AfterViewInit, OnDestroy {
+  private observador?: IntersectionObserver;
+  private reloj?: number;
 
-  productos: Producto[] = [
+  readonly negocio = NEGOCIO;
+  readonly pedido = pedido;
+  estado: EstadoLocal = estadoDelLocal();
+
+  constructor(private host: ElementRef<HTMLElement>, private zona: NgZone) {}
+
+  // Fotos reales de Instagram. Descripciones: textos de las propias publicaciones.
+  readonly productos: Producto[] = [
     {
-      nombre: 'Raviolones de osobuco',
-      descripcion: '',
-      imagen:
-        'https://www.miguelvergara.com/actualidad/wp-content/uploads/2024/04/que-son-los-ravioli-de-carne-pasta-rellena-1200x860.jpg',
+      nombre: 'Sorrentinos',
+      descripcion: 'Frescos, hechos en el día.',
+      imagen: 'assets/instagram-sorrentinos.jpg',
+      alt: 'Plato con siete sorrentinos frescos bañados en salsa de tomate',
+      publicacion: 'https://www.instagram.com/p/Das8_hnMm2v/',
     },
     {
-      nombre: 'Torteletti de pollo y cebolla de verdeo',
-      descripcion: '',
-      imagen:
-        'https://www.lecuine.com/blog/wp-content/uploads/2016/09/pasta-rellena-625x408.jpg',
+      nombre: 'Ñoquis de calabaza',
+      descripcion: 'Naturales, sin colorantes ni conservantes. Hechos en el momento.',
+      imagen: 'assets/instagram-nioquis-calabaza.webp',
+      alt: 'Ñoquis de calabaza espolvoreados con harina sobre una mesada de mármol',
+      publicacion: 'https://www.instagram.com/p/DY7zUYlMgs_/',
     },
     {
-      nombre: 'Sorrentinos de Rucula,jamon crudo y muzzarella',
-      descripcion: '',
-      imagen:
-        'https://img.freepik.com/foto-gratis/primer-plano-raviolis-crudos-espolvoreados-harina-tablero-madera-ingredientes_23-2147926006.jpg?ga=GA1.1.1745390637.1747685783&semt=ais_hybrid&w=740',
+      nombre: 'Canelones caseros',
+      descripcion: 'De suprema de pollo y verdura, hechos con panqueques. Los hacemos a pedido.',
+      imagen: 'assets/instagram-canelones.webp',
+      alt: 'Canelones de pollo y verdura con salsa y queso rallado en bandejas',
+      publicacion: 'https://www.instagram.com/p/DYhH3ygpgvI/',
+    },
+    {
+      nombre: 'Ñoquis de papa rellenos de muzzarella',
+      descripcion: 'Ñoquis de papa frescos, con corazón de muzzarella.',
+      imagen: 'assets/instagram-nioquis-papa.jpg',
+      alt: 'Ñoquis de papa enharinados, apilados sobre una mesada blanca',
+      publicacion: 'https://www.instagram.com/p/DZkPlYJNMsV/',
+    },
+    {
+      // TODO(cliente): la publicación de Instagram dice "trucha salmonada" pero la foto
+      // muestra raviolones con langostinos. Se muestra un texto neutro hasta confirmar
+      // el relleno real o cambiar la foto.
+      nombre: 'Raviolones frescos',
+      descripcion: 'Con salsa cremosa. Consultanos por los rellenos disponibles.',
+      imagen: 'assets/instagram-raviolones.jpg',
+      alt: 'Raviolones con salsa cremosa y langostinos sobre un plato negro',
+      publicacion: 'https://www.instagram.com/p/DdzwPxSN_9s/',
     },
   ];
 
-  scrollToSection(id: string) {
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+  // Sólo hechos que figuran en el sitio anterior o en las publicaciones de Instagram.
+  readonly diferenciales: Diferencial[] = [
+    {
+      titulo: 'Ravioles cortados a mano',
+      texto: 'Con una ruedita, como las que usaban las abuelas.',
+    },
+    {
+      titulo: 'Sin colorantes ni conservantes',
+      texto: 'Los ñoquis de calabaza son naturales y los hacemos en el momento.',
+    },
+    {
+      titulo: 'Para toda la semana',
+      texto: 'Fideos, ravioles, sorrentinos, canelones, lasagna y salsas. Y especiales que cambian cada semana.',
+    },
+    {
+      titulo: 'De barrio, hace más de 15 años',
+      texto: 'Una fábrica familiar de Sarandí que trabaja cerca de sus vecinos.',
+    },
+  ];
+
+  ngOnInit() {
+    // El estado "abierto ahora" se refresca solo, sin disparar detección de cambios de más.
+    this.zona.runOutsideAngular(() => {
+      this.reloj = window.setInterval(() => {
+        const nuevo = estadoDelLocal();
+        if (nuevo.texto !== this.estado.texto) this.zona.run(() => (this.estado = nuevo));
+      }, 60_000);
+    });
   }
 
-  toggleContacto() {
-    this.contacto = !this.contacto;
+  ngAfterViewInit() {
+    // Sin movimiento (preferencia del sistema) o sin observer: todo queda visible.
+    const sinMovimiento = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (sinMovimiento || !('IntersectionObserver' in window)) return;
+
+    const elementos = this.host.nativeElement.querySelectorAll<HTMLElement>('.reveal, .reveal-wipe');
+    this.observador = new IntersectionObserver(
+      (entradas) => {
+        for (const e of entradas) {
+          if (!e.isIntersecting) continue;
+          e.target.classList.replace('reveal-pending', 'reveal-in');
+          this.observador?.unobserve(e.target);
+        }
+      },
+      { threshold: 0, rootMargin: '0px 0px 10% 0px' },
+    );
+    elementos.forEach((el) => {
+      el.classList.add('reveal-pending');
+      this.observador?.observe(el);
+    });
   }
 
-  onCerrarContacto() {
-    // Si Contacto quiere avisar que se cerró, por ejemplo
-    this.contacto = false;
+  ngOnDestroy() {
+    this.observador?.disconnect();
+    if (this.reloj) window.clearInterval(this.reloj);
   }
 
-  toggleUbicacion() {
-    this.ubicacion = !this.ubicacion;
-    console.log(this.ubicacion);
+  ir(evento: Event, id: string) {
+    evento.preventDefault();
+    const sinMovimiento = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    document.getElementById(id)?.scrollIntoView({ behavior: sinMovimiento ? 'auto' : 'smooth' });
   }
 
-  onCerrarUbicacion() {
-    // Si Ubicacion quiere avisar que se cerró, por ejemplo
-    this.ubicacion = false;
-  }
-
-  abrirModalProductos() {
-    this.mostrarProductos = true;
-  }
-  cerrarModalProductos() {
-    this.mostrarProductos = false;
+  // Botón "Pedir este" de cada pasta: WhatsApp con el nombre del producto; si no hay WhatsApp, llamada.
+  pedirHref(nombre: string): string {
+    if (pedido.esWhatsapp) {
+      return `https://wa.me/${NEGOCIO.whatsapp}?text=` + encodeURIComponent(`Hola! Quiero pedir ${nombre} para retirar por el local.`);
+    }
+    return pedido.href;
   }
 }

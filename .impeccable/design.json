@@ -1,0 +1,127 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-01T00:00:00Z",
+  "title": "Design System: Francesca",
+  "extensions": {
+    "colorMeta": {
+      "verde-noche": { "role": "primary", "displayName": "Verde Noche", "canonical": "#0d2a16", "tonalRamp": ["#04100a", "#0d2a16", "#064f26", "#007234", "#3a9a62", "#7fc096", "#bfe0cb", "#dff1e2"] },
+      "verde-marca": { "role": "primary", "displayName": "Verde Marca", "canonical": "#007234", "tonalRamp": ["#0d2a16", "#064f26", "#005a29", "#007234", "#2f9157", "#6bb88a", "#aedcc1", "#dff1e2"] },
+      "rojo-bandera": { "role": "secondary", "displayName": "Rojo Bandera", "canonical": "#cd212a", "tonalRamp": ["#4a000a", "#730010", "#920013", "#b2001b", "#cd212a", "#e4606a", "#f2a3a6", "#ffe6e3"] },
+      "papel": { "role": "neutral", "displayName": "Papel", "canonical": "#f4f5f0", "tonalRamp": ["#1c231c", "#505850", "#849083", "#b0b9af", "#d4dbd3", "#eaeee7", "#f4f5f0", "#ffffff"] },
+      "tinta": { "role": "neutral", "displayName": "Tinta", "canonical": "#1c231c", "tonalRamp": ["#0e130e", "#1c231c", "#323a32", "#505850", "#707870", "#849083", "#b0b9af", "#d4dbd3"] }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "H1 de portada y cierre, Young Serif 400." },
+      "headline": { "displayName": "Headline", "purpose": "Títulos de sección." },
+      "title": { "displayName": "Title", "purpose": "Familias, pastas, frases de diferenciales, dirección." },
+      "body": { "displayName": "Body", "purpose": "Texto corrido en Hanken Grotesk." },
+      "lead": { "displayName": "Bajada", "purpose": "Bajada bajo el título, máximo 56ch." },
+      "label": { "displayName": "Label", "purpose": "Botones y datos, peso 700." }
+    },
+    "shadows": [
+      { "name": "barra-scroll", "value": "0 6px 20px rgba(13,42,22,0.1)", "purpose": "Barra superior al hacer scroll." },
+      { "name": "barra-movil", "value": "0 -6px 18px rgba(13,42,22,0.1)", "purpose": "Barra de acción inferior en celular." },
+      { "name": "menu-movil", "value": "0 14px 24px rgba(13,42,22,0.12)", "purpose": "Menú desplegable móvil." }
+    ],
+    "motion": [
+      { "name": "it-ease", "value": "cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "Curva única, salida exponencial." },
+      { "name": "reveal-sube", "value": "700ms, translateY(24px) + opacity", "purpose": "Entrada de texto al scroll." },
+      { "name": "reveal-wipe", "value": "1000ms, clip-path inset(0 100% 0 0)", "purpose": "Entrada de fotos como lámina de masa." },
+      { "name": "stagger", "value": "calc(var(--i) * 90ms)", "purpose": "Escalonado entre elementos." }
+    ],
+    "breakpoints": [
+      { "name": "md", "value": "768px" },
+      { "name": "lg", "value": "992px" },
+      { "name": "contenedor", "value": "1180px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Botón de acción",
+      "kind": "button",
+      "refersTo": "button-accion",
+      "description": "CTA rojo píldora: pedir, llamar.",
+      "html": "<button class=\"ds-btn-accion\">Hacé tu pedido</button>",
+      "css": ".ds-btn-accion{background:var(--it-rojo-bandera,#cd212a);color:#fff;border:1px solid var(--it-rojo-bandera,#cd212a);border-radius:999px;min-height:48px;padding:0 1.5rem;font-weight:700;font-family:'Hanken Grotesk',system-ui,sans-serif;transition:transform 250ms cubic-bezier(.16,1,.3,1),background-color 200ms}.ds-btn-accion:hover{background:#920013;border-color:#920013;transform:translateY(-2px)}.ds-btn-accion:focus-visible{outline:3px solid #cd212a;outline-offset:2px}"
+    },
+    {
+      "name": "Botón contorno",
+      "kind": "button",
+      "refersTo": "button-contorno",
+      "description": "Secundario neutro que se vuelve verde en hover.",
+      "html": "<button class=\"ds-btn-contorno\">Ver nuestras pastas</button>",
+      "css": ".ds-btn-contorno{background:transparent;color:#1c231c;border:1px solid #849083;border-radius:999px;min-height:48px;padding:0 1.5rem;font-weight:700;font-family:'Hanken Grotesk',system-ui,sans-serif;transition:transform 250ms cubic-bezier(.16,1,.3,1),background-color 200ms,color 200ms}.ds-btn-contorno:hover{background:#007234;border-color:#007234;color:#fff;transform:translateY(-2px)}.ds-btn-contorno:focus-visible{outline:3px solid #cd212a;outline-offset:2px}"
+    },
+    {
+      "name": "Chip de gusto",
+      "kind": "chip",
+      "refersTo": "chip-gusto",
+      "description": "Píldora blanca con borde verde para listar variedades.",
+      "html": "<span class=\"ds-chip\">Ricota y jamón</span>",
+      "css": ".ds-chip{display:inline-block;padding:.4rem .95rem;border:1px solid #007234;border-radius:999px;background:#fff;color:#064f26;font-size:1rem;font-weight:500;font-family:'Hanken Grotesk',system-ui,sans-serif}"
+    },
+    {
+      "name": "Enlace de dato",
+      "kind": "custom",
+      "description": "Teléfono o dirección: rojo subrayado, acción nº1.",
+      "html": "<a class=\"ds-dato\" href=\"#\">Llamar al local</a>",
+      "css": ".ds-dato{color:#b2001b;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:2px;font-weight:700}.ds-dato:hover,.ds-dato:focus-visible{color:#920013;text-decoration-thickness:2px}"
+    },
+    {
+      "name": "Navegación",
+      "kind": "nav",
+      "description": "Barra blanca con marca serif y enlaces píldora.",
+      "html": "<nav class=\"ds-nav\"><span class=\"ds-marca\">Francesca</span><a href=\"#\">Pastas</a><a href=\"#\">Dónde</a></nav>",
+      "css": ".ds-nav{display:flex;align-items:center;gap:.25rem;min-height:68px;padding:0 1.25rem;background:rgba(255,255,255,.96);border-bottom:1px solid #d4dbd3;font-family:'Hanken Grotesk',system-ui,sans-serif}.ds-marca{margin-right:auto;font-family:'Young Serif',Georgia,serif;font-size:1.5rem;color:#007234}.ds-nav a{padding:.6rem .9rem;border-radius:999px;color:#1c231c;font-weight:600;text-decoration:none;transition:background-color 200ms,color 200ms}.ds-nav a:hover{background:#dff1e2;color:#064f26}.ds-nav a:focus-visible{outline:3px solid #cd212a;outline-offset:2px}"
+    },
+    {
+      "name": "Franja tricolore",
+      "kind": "custom",
+      "description": "Firma de la marca: tres tercios, bandera exacta.",
+      "html": "<hr class=\"ds-tricolore\">",
+      "css": ".ds-tricolore{height:12px;border:0;margin:0;opacity:1;background-image:linear-gradient(to right,#008c45 0 33.333%,#fff 33.333% 66.666%,#cd212a 66.666% 100%);box-shadow:inset 0 1px 0 rgba(13,42,22,.16),inset 0 -1px 0 rgba(13,42,22,.16)}"
+    },
+    {
+      "name": "Lista de diferenciales",
+      "kind": "custom",
+      "description": "Frases grandes sobre verde marca separadas por filetes.",
+      "html": "<ul class=\"ds-dif\"><li><h3>Hecho a mano</h3><p>Cada pieza se arma en el local.</p></li><li><h3>Sin conservantes</h3><p>Pasta fresca del día.</p></li></ul>",
+      "css": ".ds-dif{list-style:none;margin:0;padding:0 1.25rem;background:#007234;color:#fff;font-family:'Hanken Grotesk',system-ui,sans-serif}.ds-dif li{padding:1.5rem 0;border-top:1px solid rgba(255,255,255,.35)}.ds-dif li:last-child{border-bottom:1px solid rgba(255,255,255,.35)}.ds-dif h3{margin:0 0 .35rem;font-family:'Young Serif',Georgia,serif;font-weight:400;font-size:1.9rem;line-height:1.15}.ds-dif p{margin:0;font-size:1.05rem}"
+    }
+  ],
+  "narrative": {
+    "northStar": "La mesada de la fábrica",
+    "overview": "La página es la mesada donde se hace la pasta: fotos reales y grandes sobre papel claro, interrumpidas por bandas de color a ancho completo. El tricolore del logo se reparte a escala de página y no como detalle: verde noche y verde marca ocupan secciones enteras, papel y blanco son la mesada, y el rojo bandera aparece solo donde hay que actuar. Es cálida por la comida y por Young Serif, no por fondos tintados ni texturas de utilería.",
+    "keyCharacteristics": [
+      "Bandas a ancho completo alternando verde noche, papel, blanco, papel-2, verde marca.",
+      "Rojo reservado a la acción (CTA, teléfono, dirección).",
+      "Títulos en serif redondeada de peso único, texto en grotesca humanista.",
+      "Todo botón es píldora; toda foto tiene esquina casi recta (4px).",
+      "Plano: sin sombras de decoración; la profundidad la dan las bandas de color.",
+      "Una franja tricolore como firma."
+    ],
+    "rules": [
+      { "name": "The Rojo Es Acción Rule", "body": "El rojo significa \"llamá, pedí, andá\". Si un elemento no es una acción o un dato accionable, no es rojo.", "section": "colors" },
+      { "name": "The Bandera Exacta Rule", "body": "Los valores puros de bandera se usan solo en el separador tricolore y en el fondo de botones. Todo texto usa la rampa.", "section": "colors" },
+      { "name": "The Dato Sobre Oscuro Rule", "body": "Sobre verde noche el rojo no llega a 4,5:1: el dato accionable va en blanco, subrayado.", "section": "colors" },
+      { "name": "The Un Peso Rule", "body": "Los títulos son siempre peso 400. El énfasis viene de tamaño y color, no de negrita.", "section": "typography" },
+      { "name": "The Título Balanceado Rule", "body": "Los encabezados llevan text-wrap: balance y -0.015em; los párrafos, text-wrap: pretty.", "section": "typography" },
+      { "name": "The Sombra Verde Rule", "body": "Si hay sombra, es difusa y teñida de verde noche, nunca negra ni desplazada.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do usar solo los roles de :root (--it-*) en componentes, nunca hex.",
+      "Do poner cada banda de página a ancho completo, alternando campo oscuro y papel.",
+      "Do mostrar teléfono y dirección como enlaces rojos subrayados (blancos subrayados sobre verde noche).",
+      "Do mantener botones de 48px o más y pastillas con 999px.",
+      "Do sumar prefers-reduced-motion a cada animación nueva."
+    ],
+    "donts": [
+      "Don't usar rojo para decoración, énfasis o error de marca.",
+      "Don't usar btn-danger, text-danger, bg-light ni la paleta por defecto de Bootstrap.",
+      "Don't poner texto sobre la foto de pasta; el texto va sobre verde noche.",
+      "Don't responder a una sección con una grilla de tarjetas idénticas icono/título/párrafo.",
+      "Don't usar negrita en títulos Young Serif.",
+      "Don't agregar sombras negras o desplazadas."
+    ]
+  }
+}

@@ -1,25 +1,23 @@
-<section class="container py-5">
-  <h2 class="text-danger text-center mb-4">Nuestros productos</h2>
-  <div class="table-responsive">
-    <table class="table align-middle">
-      <thead class="table-light">
-        <tr>
-          <th>Producto</th>
-          <th>Gustos</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let producto of productos" class="producto-row">
-          <td class="fw-bold text-danger fs-5">{{ producto.categoria }}</td>
-          <td>
-            <div class="d-flex flex-wrap">
-              <span class="gusto-chip" *ngFor="let gusto of producto.gustos">
-                {{ gusto }}
-              </span>
-            </div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+<section id="gustos" class="seccion gustos" aria-labelledby="gustos-titulo">
+  <div class="contenedor gustos-grilla">
+    <div class="gustos-intro reveal">
+      <h2 id="gustos-titulo" class="titulo-seccion texto-marca">Todos los gustos</h2>
+      <p class="bajada">
+        Elegí la familia y mirá qué rellenos tenemos. Algunos especiales cambian cada semana: consultanos qué hay.
+      </p>
+    </div>
+
+    <div class="gustos-lista">
+      <details class="familia reveal" *ngFor="let p of productos; let i = index" [open]="escritorio && i < 3" [style.--i]="i % 4">
+        <summary>
+          <span class="familia-nombre">{{ p.categoria }}</span>
+          <span class="familia-cuenta">{{ p.gustos.length }} {{ p.gustos.length === 1 ? 'gusto' : 'gustos' }}</span>
+          <app-icono class="familia-icono" nombre="mas"></app-icono>
+        </summary>
+        <ul class="gustos-chips">
+          <li *ngFor="let gusto of p.gustos">{{ gusto }}</li>
+        </ul>
+      </details>
+    </div>
   </div>
 </section>

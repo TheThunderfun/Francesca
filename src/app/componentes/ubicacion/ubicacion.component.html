@@ -1,30 +1,46 @@
-<section 
-  *ngIf="mostrar || animandoCerrar" 
-  [ngClass]="{'fade-in': mostrar && !animandoCerrar, 'fade-out': animandoCerrar}" 
-  class="ubicacion-overlay"
->
-  <div 
-    class="ubicacion-card container text-center p-4 position-relative"
-    [ngClass]="{'zoom-in': mostrar && !animandoCerrar, 'zoom-out': animandoCerrar}"
-  >
-    <button class="cerrar-btn" (click)="cerrarUbicacion()">×</button>
+<section id="donde" class="seccion donde" aria-labelledby="donde-titulo">
+  <div class="contenedor donde-grilla">
+    <div class="donde-datos reveal">
+      <h2 id="donde-titulo" class="titulo-seccion texto-marca">Pasá a buscar tu pasta.</h2>
+      <p class="bajada">Nuestra fábrica está en Sarandí. La venta es en el local: pasás y te llevás la pasta fresca.</p>
 
-    <h2 class="mb-4 text-danger">Ubicación</h2>
+      <address class="direccion">
+        <span class="direccion-calle">{{ negocio.direccion }}</span>
+        <span class="direccion-zona">{{ negocio.localidad }}</span>
+      </address>
 
-    <p class="text-muted small mb-1">
-      Av. Manuel Belgrano 3311, Sarandí, Provincia de Buenos Aires
-    </p>
-    <p class="text-muted small mb-3">
-      Martes a sábado de 9 a 13 y de 17 a 19hs. Domingo de 9 a 13hs.
-    </p>
+      <div class="donde-acciones">
+        <a class="btn btn-accion" [href]="negocio.mapaLink" target="_blank" rel="noopener noreferrer">
+          <app-icono nombre="ubicacion"></app-icono> Cómo llegar
+        </a>
+        <a class="btn btn-contorno" [href]="'tel:' + negocio.telefonoLink">
+          <app-icono nombre="telefono"></app-icono> {{ negocio.telefonoVisible }}
+        </a>
+      </div>
 
-    <div class="iframe-wrapper ratio ratio-16x9">
+      <h3 class="subtitulo">Horarios</h3>
+      <p *ngIf="estado" class="estado-local" [class.abierto]="estado.abierto">{{ estado.texto }}</p>
+      <dl class="horarios">
+        <div class="horario-fila" *ngFor="let h of horarios" [class.hoy]="estado && h.indices.includes(estado.hoy)">
+          <dt>{{ h.dias }}</dt>
+          <dd>{{ h.horas }}</dd>
+        </div>
+      </dl>
+
+      <h3 class="subtitulo">Cómo se compra</h3>
+      <ul class="modalidades">
+        <li><app-icono nombre="tienda"></app-icono> Retiro en el local</li>
+        <li><app-icono nombre="efectivo"></app-icono> Efectivo, tarjetas y Mercado Pago</li>
+      </ul>
+    </div>
+
+    <div class="donde-mapa reveal-wipe">
       <iframe
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3280.788194537277!2d-58.34834272493904!3d-34.6852947618098!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95a3331e4bb62699%3A0x96d0e25318523e59!2sAv.%20Manuel%20Belgrano%203311%2C%20B1872FVM%20Sarand%C3%AD%2C%20Provincia%20de%20Buenos%20Aires!5e0!3m2!1ses-419!2sar!4v1747509257968!5m2!1ses-419!2sar"
-        style="border: 0"
-        allowfullscreen=""
+        title="Mapa con la ubicación de Francesca, Av. Manuel Belgrano 3311, Sarandí"
+        [src]="mapaSeguro"
         loading="lazy"
         referrerpolicy="no-referrer-when-downgrade"
+        allowfullscreen
       ></iframe>
     </div>
   </div>

@@ -1,0 +1,25 @@
+<section id="resenas" class="seccion superficie-alt" aria-labelledby="resenas-titulo">
+  <div class="contenedor resenas-grilla">
+    <div class="resenas-resumen reveal">
+      <h2 id="resenas-titulo" class="titulo-seccion texto-marca">Lo que dicen quienes ya compraron</h2>
+      <p
+        class="resenas-nota"
+        attr.aria-label="Calificación de {{ calificacion }} sobre 5 en Google, {{ cantidad }} opiniones"
+      ><span class="resenas-numero" aria-hidden="true">{{ calificacion }}</span><span aria-hidden="true">en Google · {{ cantidad }} opiniones</span></p>
+      <a class="enlace-dato" [href]="enlace" target="_blank" rel="noopener noreferrer">
+        Ver todas las opiniones en Google Maps <app-icono nombre="flecha"></app-icono>
+      </a>
+    </div>
+
+    <ul class="resenas-lista">
+      <li class="reveal" *ngFor="let r of resenas; let i = index" [style.--i]="i">
+        <figure class="resena">
+          <blockquote class="resena-texto">
+            <p>{{ r.texto }}</p>
+          </blockquote>
+          <figcaption class="resena-autor">{{ r.autor }}, en Google</figcaption>
+        </figure>
+      </li>
+    </ul>
+  </div>
+</section>

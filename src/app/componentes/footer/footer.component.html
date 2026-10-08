@@ -1,56 +1,50 @@
-<footer class="footer bg-dark text-light py-4 mt-5">
-  <div class="container text-center">
-    <p class="mb-1">&copy; 2025 Francesca - Fábrica de Pastas</p>
-    <p class="small">
-      Hecho con ❤️ en Argentina. Síguenos en:
-      <a
-        href="https://www.facebook.com/profile.php?id=100063466961888"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="text-light mx-1"
-        >Facebook</a
-      >
-      |
-      <a
-        href="https://www.instagram.com/francescapasionporlaspastas/?hl=es"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="text-light mx-1"
-        >Instagram</a
-      >
-    </p>
-    <p class="small">
-      📞 <strong>Teléfono:</strong>
-      <a href="tel:42055330" class="text-decoration-none text-success"
-        >+54 42055330</a
-      >
-    </p>
-    <p class="small">
-      📍 <strong>Dirección:</strong>
-      <a
-        class="text-danger"
-        href="https://www.google.com/maps?q=Av.+Manuel+Belgrano+3311,+Sarandí"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Av. Manuel Belgrano 3311, Sarandí, Provincia de Buenos Aires
-      </a>
-    </p>
-
-    <div class="medios-pago mt-3">
-      <h6 class="text-light mb-2">Medios de Pago</h6>
-      <i
-        class="bi bi-credit-card-2-front-fill fs-3 mx-2"
-        title="Tarjetas de crédito/débito"
-      ></i>
-      <img
-        src="assets/mercadoPago.png"
-        alt="Mercado Pago"
-        class="medio-pago-logo mx-2"
-        title="Mercado Pago"
-        tabindex="0"
-      />
-      <i class="bi bi-cash-stack fs-3 mx-2" title="Efectivo"></i>
+<hr class="regla-tricolore" />
+<footer class="footer superficie-oscura">
+  <div class="contenedor footer-grilla">
+    <div class="footer-marca">
+      <img class="footer-logo" src="assets/logo-192.png" alt="" width="64" height="64" loading="lazy" />
+      <p class="footer-nombre">{{ negocio.nombre }}</p>
+      <p class="footer-sub">{{ negocio.descriptor }} · Sarandí</p>
     </div>
+
+    <div>
+      <h2 class="footer-titulo">Contacto</h2>
+      <ul class="footer-lista">
+        <li><a class="enlace-dato" [href]="'tel:' + negocio.telefonoLink">{{ negocio.telefonoVisible }}</a></li>
+        <li>
+          <a class="enlace-dato" [href]="negocio.mapaLink" target="_blank" rel="noopener noreferrer">
+            {{ negocio.direccion }}, {{ negocio.localidad }}
+          </a>
+        </li>
+        <li><a [href]="negocio.instagram" target="_blank" rel="noopener noreferrer">Instagram {{ negocio.instagramUsuario }}</a></li>
+        <li><a [href]="negocio.facebook" target="_blank" rel="noopener noreferrer">Facebook</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <h2 class="footer-titulo">Horarios</h2>
+      <dl class="footer-horarios">
+        @for (h of horarios; track h.dias) {
+          <div>
+            <dt>{{ h.dias }}</dt>
+            <dd>{{ h.horas }}</dd>
+          </div>
+        }
+      </dl>
+    </div>
+
+    <div>
+      <h2 class="footer-titulo">Medios de pago</h2>
+      <ul class="medios-pago">
+        <li><app-icono nombre="efectivo"></app-icono> Efectivo</li>
+        <li><app-icono nombre="tarjeta"></app-icono> Tarjetas</li>
+        <li><app-icono nombre="billetera"></app-icono> Mercado Pago</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="contenedor footer-pie">
+    <p>&copy; {{ anio }} {{ negocio.nombre }} · {{ negocio.descriptor }}</p>
+    <!-- TODO(cliente): razón social / CUIT si se quieren mostrar los datos fiscales del negocio. -->
   </div>
 </footer>

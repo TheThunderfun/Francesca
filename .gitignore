@@ -40,3 +40,8 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+.vercel
+
+# Herramientas de diseño y pruebas (capturas y logs locales)
+.playwright-mcp/
+.impeccable/review/

@@ -1,12 +1,380 @@
+// =============================================================
+//  Francesca — sistema de color
+//  Tricolore italiano. Fuente: especificación oficial de 2003
+//  (Pantone 17-6153 Fern Green / 11-0601 Bright White /
+//   18-1662 Flame Scarlet), reconciliada con el logo de la marca,
+//   que ya usaba esas mismas tonalidades un poco más oscuras.
+//
+//  Regla de uso:
+//    verde  -> identidad y estructura (títulos, footer, chips)
+//    blanco -> el fondo de la página
+//    rojo   -> acción, y nada más que acción
+//
+//  Los colores puros de bandera se usan donde son la bandera:
+//  el separador tricolore y los botones. Todo lo que lleva texto
+//  usa la rampa, que está en las mismas tonalidades pero con la
+//  luminosidad ajustada para pasar WCAG AA. Ningún par de esta
+//  hoja baja de 4,5:1 en texto de cuerpo.
+// =============================================================
+
+// ---------- 1. Bandera: valores oficiales, exactos ----------
+$it-verde-bandera:  #008c45;
+$it-blanco-bandera: #f4f5f0;
+$it-rojo-bandera:   #cd212a;
+
+// ---------- 2. Rampa segura para texto y controles ----------
+// (derivada en OKLCH sobre las tonalidades de bandera)
+$it-papel:        #f4f5f0; // = Bright White oficial. Canvas.
+$it-papel-2:      #eaeee7;
+$it-linea:        #d4dbd3; // separadores decorativos
+$it-linea-fuerte: #849083; // bordes de control — 3,04:1 sobre papel
+$it-tinta:        #1c231c; // texto principal — 14,67:1
+$it-tinta-2:      #505850; // texto secundario — 6,72:1
+$it-verde-pale:   #dff1e2;
+$it-verde-texto:  #007234; // verde del logo — 5,54:1 sobre papel
+$it-verde-onda:   #064f26; // hover — 8,90:1
+$it-verde-noche:  #0d2a16; // superficie oscura (footer) — 14,09:1
+$it-rojo-pale:    #ffe6e3;
+$it-rojo-texto:   #b2001b; // rojo en texto — 6,59:1
+$it-rojo-onda:    #920013; // hover — blanco encima 9,41:1
+
+// ---------- 3. Remapeo de Bootstrap ----------
+// Sin esto la identidad por defecto sigue siendo la de la librería.
+// Se declara ANTES del import para que todo el framework herede la marca.
+
+// Primitivas: para que no quede ningún hex de Bootstrap en la salida.
+$red:    $it-rojo-bandera;
+$green:  $it-verde-bandera;
+$yellow: #8a5a00;
+$blue:   #0b5c75;
+$cyan:   #0b5c75;
+
+// Los grises de Bootstrap son neutros puros. Los de Francesca llevan
+// una pizca de croma hacia el verde de marca: da cohesión y evita el
+// beige que sale por defecto cuando uno "entibia" un neutro.
+$gray-100: $it-papel-2;
+$gray-600: $it-tinta-2;
+$gray-900: $it-tinta;
+
+$primary:   $it-verde-texto;
+$secondary: $it-tinta-2;
+$success:   $it-verde-texto;
+$danger:    $it-rojo-texto;  // rojo real de error, no el color de marca
+$warning:   #8a5a00;         // el #ffc107 de Bootstrap daba 1,63:1
+$info:      #0b5c75;
+$light:     $it-papel-2;
+$dark:      $it-verde-noche;
+
+$body-bg:     $it-papel;
+$body-color:  $it-tinta;
+$border-color: $it-linea;
+$link-color:  $it-verde-texto;
+$link-hover-color: $it-verde-onda;
+
+// Objetivos táctiles: el mínimo de 44px se resuelve en la pasada
+// `adapt`; acá sólo se evita que btn-sm quede más chico todavía.
+$min-contrast-ratio: 4.5;
+
+// Tipografía: Young Serif para títulos (redondeada, cálida, de cartel
+// de barrio) y Hanken Grotesk para el texto corrido: sans humanista,
+// abierta, legible para gente mayor leyendo al sol. Young Serif existe
+// sólo en peso 400, así que los títulos no llevan negrita sintética.
+$font-family-base: 'Hanken Grotesk', system-ui, -apple-system, 'Segoe UI', sans-serif;
+$headings-font-family: 'Young Serif', Georgia, serif;
+$headings-font-weight: 400;
+
+// Se importa sólo lo que se usa (reboot, botones y visually-hidden)
+// para no cargar todo el framework de Bootstrap.
+@import "bootstrap/scss/functions";
+@import "bootstrap/scss/variables";
+@import "bootstrap/scss/variables-dark";
+@import "bootstrap/scss/maps";
+@import "bootstrap/scss/mixins";
+@import "bootstrap/scss/root";
+@import "bootstrap/scss/reboot";
+@import "bootstrap/scss/buttons";
+@import "bootstrap/scss/helpers/visually-hidden";
+
+// ---------- 4. Tokens en CSS ----------
+// Los SCSS de componente se compilan por separado y no ven las
+// variables de arriba, así que los roles se exponen como custom
+// properties. Los componentes usan SIEMPRE estas, nunca hex.
+:root {
+  // bandera exacta
+  --it-verde-bandera:  #{$it-verde-bandera};
+  --it-blanco-bandera: #{$it-blanco-bandera};
+  --it-rojo-bandera:   #{$it-rojo-bandera};
+
+  // primitivas
+  --it-papel:        #{$it-papel};
+  --it-papel-2:      #{$it-papel-2};
+  --it-linea:        #{$it-linea};
+  --it-linea-fuerte: #{$it-linea-fuerte};
+  --it-tinta:        #{$it-tinta};
+  --it-tinta-2:      #{$it-tinta-2};
+  --it-verde-pale:   #{$it-verde-pale};
+  --it-verde-texto:  #{$it-verde-texto};
+  --it-verde-onda:   #{$it-verde-onda};
+  --it-verde-noche:  #{$it-verde-noche};
+  --it-rojo-pale:    #{$it-rojo-pale};
+  --it-rojo-texto:   #{$it-rojo-texto};
+  --it-rojo-onda:    #{$it-rojo-onda};
+
+  // roles semánticos — lo que los componentes deberían nombrar
+  --it-canvas:        var(--it-papel);
+  --it-superficie:    #ffffff;
+  --it-superficie-2:  var(--it-papel-2);
+  --it-superficie-oscura: var(--it-verde-noche);
+  --it-marca:         var(--it-verde-texto);
+  --it-accion:        var(--it-rojo-bandera);
+  --it-accion-hover:  var(--it-rojo-onda);
+  --it-sobre-accion:  #ffffff;
+  --it-sobre-foto:    #ffffff; // texto sobre imagen
+  --it-borde:         var(--it-linea);
+  --it-borde-control: var(--it-linea-fuerte);
+
+  // sobre superficie oscura
+  --it-oscura-texto:   var(--it-papel);
+  --it-oscura-texto-2: var(--it-verde-pale);
+  --it-oscura-enlace:  #ffffff;
+}
+
 body {
-  background: #fdf4f5;
-
-  font-family: 'PT Serif', serif;
-
+  background: var(--it-canvas);
+  color: var(--it-tinta);
+  font-family: 'Hanken Grotesk', system-ui, sans-serif;
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
 }
 
-.modal.d-block {
-  display: block !important;
-  background-color: rgba(0,0,0,0.5);
+// Fuente de títulos como token, para los componentes que no son h1–h6.
+:root { --it-fuente-titulo: 'Young Serif', Georgia, serif; }
+
+h1, h2, h3, h4, h5, h6 { text-wrap: balance; letter-spacing: -0.015em; }
+p { text-wrap: pretty; }
+
+// Scroll suave sólo si la persona no pidió menos movimiento.
+// scroll-padding: que la barra fija no tape el título al ir a una sección.
+html { scroll-padding-top: 76px; }
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
 }
 
+// Curva compartida por todas las animaciones: salida exponencial.
+:root { --it-ease: cubic-bezier(0.16, 1, 0.3, 1); }
+
+// Los componentes raíz son elementos personalizados (inline por defecto):
+// sin esto la barra fija no tiene un bloque contenedor claro.
+app-root, app-inicio { display: block; }
+
+// Superficies del navegador que también son parte del diseño.
+::selection { background: var(--it-verde-texto); color: #fff; }
+html { scrollbar-color: var(--it-linea-fuerte) var(--it-papel-2); }
+
+// En celular la barra inferior de acción ocupa 72px: el contenido
+// no puede quedar tapado debajo de ella.
+@media (max-width: 767.98px) {
+  body { padding-bottom: 72px; }
+}
+
+// ---------- 5. Roles de marca ----------
+// Clases propias en lugar de utilidades semánticas de Bootstrap.
+// Usar `btn-danger` para un CTA hacía que el color dijera "peligro"
+// donde el sitio quería decir "llamá".
+
+.texto-marca { color: var(--it-marca) !important; }
+.texto-tinta { color: var(--it-tinta) !important; }
+.texto-tinta-2 { color: var(--it-tinta-2) !important; }
+
+// El rojo es la acción. Es raro a propósito: por eso tiene fuerza.
+.btn-accion {
+  --bs-btn-color: var(--it-sobre-accion);
+  --bs-btn-bg: var(--it-accion);
+  --bs-btn-border-color: var(--it-accion);
+  --bs-btn-hover-color: var(--it-sobre-accion);
+  --bs-btn-hover-bg: var(--it-accion-hover);
+  --bs-btn-hover-border-color: var(--it-accion-hover);
+  --bs-btn-active-color: var(--it-sobre-accion);
+  --bs-btn-active-bg: var(--it-accion-hover);
+  --bs-btn-active-border-color: var(--it-accion-hover);
+  --bs-btn-focus-shadow-rgb: 205, 33, 42;
+}
+
+// Secundario: neutro con borde. No compite con la acción.
+.btn-contorno {
+  --bs-btn-color: var(--it-tinta);
+  --bs-btn-bg: transparent;
+  --bs-btn-border-color: var(--it-borde-control);
+  --bs-btn-hover-color: var(--it-sobre-accion);
+  --bs-btn-hover-bg: var(--it-verde-texto);
+  --bs-btn-hover-border-color: var(--it-verde-texto);
+  --bs-btn-active-color: var(--it-sobre-accion);
+  --bs-btn-active-bg: var(--it-verde-onda);
+  --bs-btn-active-border-color: var(--it-verde-onda);
+  --bs-btn-focus-shadow-rgb: 0, 114, 52;
+}
+
+// El teléfono y la dirección son el objetivo nº1 del sitio
+// (principio 1 de PRODUCT.md), así que son acción: rojo.
+// Subrayados para no depender sólo del color (WCAG 1.4.1).
+.enlace-dato {
+  color: var(--it-rojo-texto);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+  font-weight: 700;
+
+  &:hover,
+  &:focus-visible {
+    color: var(--it-rojo-onda);
+    text-decoration-thickness: 2px;
+  }
+}
+
+// Sobre la superficie oscura el rojo no llega a 4,5:1,
+// así que ahí el dato va en blanco puro (15,44:1).
+.superficie-oscura .enlace-dato {
+  color: var(--it-oscura-enlace);
+
+  &:hover,
+  &:focus-visible {
+    color: var(--it-oscura-enlace);
+    text-decoration-thickness: 2px;
+  }
+}
+
+.superficie-alt { background-color: var(--it-superficie-2); }
+.superficie-pale { background-color: var(--it-verde-pale); }
+.superficie-oscura {
+  background-color: var(--it-superficie-oscura);
+  color: var(--it-oscura-texto);
+}
+
+// ---------- 6. El tricolore como elemento ----------
+// Reemplaza la franja roja de 12px que separaba secciones.
+// La bandera aparece como decisión deliberada, tres veces,
+// en lugar de verde y rojo repartidos por todo el sitio.
+.regla-tricolore {
+  height: 12px;
+  border: 0;
+  margin: 0;
+  opacity: 1; // Bootstrap pone .25 en todo <hr>: lavaría la bandera
+  // La banda del medio va en blanco puro, no en el Bright White de
+  // bandera: ese es el mismo valor que el canvas, así que la banda
+  // desaparecía y el tricolore se leía como dos barras sueltas.
+  background-image: linear-gradient(
+    to right,
+    var(--it-verde-bandera) 0 33.333%,
+    #ffffff 33.333% 66.666%,
+    var(--it-rojo-bandera) 66.666% 100%
+  );
+  // Hairline que delimita la barra contra cualquier fondo.
+  box-shadow:
+    inset 0 1px 0 rgba(13, 42, 22, 0.16),
+    inset 0 -1px 0 rgba(13, 42, 22, 0.16);
+}
+
+// ---------- 7. Foco visible ----------
+// El foco por defecto de Bootstrap desaparecía sobre los círculos
+// rojos de cerrar. Un anillo propio, visible en las dos superficies.
+:focus-visible {
+  outline: 3px solid var(--it-accion);
+  outline-offset: 2px;
+}
+.superficie-oscura :focus-visible {
+  outline-color: var(--it-oscura-enlace);
+}
+
+// ---------- 8. Botones propios ----------
+// Objetivo táctil mínimo 48px. Peso y forma de Francesca: redondeados
+// del todo (píldora), como el logo.
+.btn {
+  --bs-btn-border-radius: 999px;
+  --bs-btn-padding-x: 1.5rem;
+  --bs-btn-font-weight: 700;
+  min-height: 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  line-height: 1.2;
+  transition:
+    transform 250ms var(--it-ease),
+    background-color 200ms,
+    color 200ms,
+    border-color 200ms;
+
+  &:hover { transform: translateY(-2px); }
+  &:active { transform: translateY(0); }
+}
+.btn-lg { --bs-btn-padding-y: 0.8rem; --bs-btn-font-size: 1.1rem; min-height: 56px; }
+
+// Secundario sobre superficies verdes: contorno blanco.
+.btn-claro {
+  --bs-btn-color: #fff;
+  --bs-btn-bg: transparent;
+  --bs-btn-border-color: rgba(255, 255, 255, 0.7);
+  --bs-btn-hover-color: var(--it-verde-noche);
+  --bs-btn-hover-bg: #fff;
+  --bs-btn-hover-border-color: #fff;
+  --bs-btn-active-color: var(--it-verde-noche);
+  --bs-btn-active-bg: #fff;
+  --bs-btn-active-border-color: #fff;
+}
+
+// ---------- 9. Estructura de la página ----------
+// Ritmo vertical único para todas las secciones; el ancho de lectura
+// y el de las fotos se controlan acá una sola vez.
+.seccion { padding-block: clamp(2.5rem, 6vw, 4.75rem); }
+.contenedor {
+  width: min(100% - 2.5rem, 1180px);
+  margin-inline: auto;
+}
+.titulo-seccion {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.08;
+  margin: 0 0 1rem;
+}
+.bajada {
+  max-width: 56ch;
+  color: var(--it-tinta-2);
+  font-size: clamp(1.05rem, 2vw, 1.2rem);
+}
+.sobre-verde { color: #fff; }
+.sobre-verde .bajada { color: var(--it-verde-pale); }
+
+// Estado del local (punto + texto). No depende sólo del color: el texto lo dice.
+.estado-local {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-weight: 600;
+  font-size: 1rem;
+  &::before {
+    content: '';
+    flex: none;
+    width: 0.65rem;
+    height: 0.65rem;
+    border-radius: 50%;
+    background: var(--it-linea-fuerte);
+  }
+  &.abierto::before { background: #5fe08a; box-shadow: 0 0 0 4px rgba(95, 224, 138, 0.25); }
+}
+
+// ---------- 10. Revelado al hacer scroll ----------
+// Dos entradas, no una igual para todo: el texto sube, las fotos se
+// destapan como una lámina de masa que se estira. El contenido es
+// visible por defecto; sólo se oculta si JS marca .reveal-pending.
+// Nunca dejan un hueco: el texto arranca casi visible y las fotos
+// arrancan ya mostradas en su mayor parte (sólo les falta una franja).
+.reveal { transition: opacity 500ms var(--it-ease), transform 600ms var(--it-ease); transition-delay: calc(var(--i, 0) * 70ms); }
+.reveal.reveal-pending { opacity: 0.25; transform: translateY(14px); }
+.reveal-wipe { transition: clip-path 800ms var(--it-ease); transition-delay: calc(var(--i, 0) * 70ms); }
+.reveal-wipe.reveal-pending { clip-path: inset(0 22% 0 0); }
+.reveal-wipe.reveal-in { clip-path: inset(0 0 0 0); }
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal, .reveal-wipe { transition: none; }
+  .btn { transition: none; &:hover { transform: none; } }
+}

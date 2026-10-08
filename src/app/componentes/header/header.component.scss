@@ -1,16 +1,108 @@
-.titulo-italiano {
-  font-family: 'Italianno', cursive;
-  font-size: 2.5rem;
-  white-space: nowrap;
+:host { display: block; position: sticky; top: 0; z-index: 1030; }
+
+.barra {
+  position: relative;
+  background: rgba(255, 255, 255, 0.96);
+  border-bottom: 1px solid var(--it-borde);
+  transition: box-shadow 300ms var(--it-ease);
+}
+.barra.con-sombra { box-shadow: 0 6px 20px rgba(13, 42, 22, 0.1); }
+
+.barra-fila {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  min-height: 68px;
 }
 
-@media (max-width: 576px) {
-  .titulo-italiano {
-    font-size: 2rem;
+.marca {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  margin-right: auto;
+  color: var(--it-marca);
+  text-decoration: none;
+  img { display: block; animation: giro-logo 1100ms var(--it-ease) 200ms both; transition: transform 700ms var(--it-ease); }
+  &:hover img { transform: rotate(360deg); }
+}
+@keyframes giro-logo { from { transform: rotate(-200deg) scale(0.6); opacity: 0; } }
+.marca-texto { display: flex; flex-direction: column; line-height: 1.1; }
+.marca-nombre { font-family: var(--it-fuente-titulo); font-size: 1.5rem; }
+.marca-sub { font-size: 0.8rem; font-weight: 600; letter-spacing: 0.04em; color: var(--it-tinta-2); }
+
+// Escritorio: enlaces en línea + botón. Celular: menú desplegable.
+.enlaces { display: none; gap: 0.25rem; }
+.enlaces a {
+  padding: 0.6rem 0.9rem;
+  border-radius: 999px;
+  color: var(--it-tinta);
+  font-weight: 600;
+  font-size: 0.98rem;
+  text-decoration: none;
+  transition: background-color 200ms, color 200ms;
+  &:hover { background: var(--it-verde-pale); color: var(--it-verde-onda); }
+}
+.boton-pedido { display: none; }
+
+.menu-boton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border: 1px solid var(--it-borde-control);
+  border-radius: 50%;
+  background: transparent;
+  color: var(--it-tinta);
+  font-size: 1.5rem;
+  app-icono { line-height: 1; }
+}
+
+/* Desplegable sobre el contenido: sólo opacidad y transform, sin animar el layout. */
+.menu-movil {
+  position: absolute;
+  inset: 100% 0 auto 0;
+  display: grid;
+  gap: 0.25rem;
+  max-height: calc(100svh - 68px);
+  overflow-y: auto;
+  padding: 0.5rem 1.25rem 1.25rem;
+  background: #fff;
+  border-bottom: 1px solid var(--it-borde);
+  box-shadow: 0 14px 24px rgba(13, 42, 22, 0.12);
+  opacity: 0;
+  transform: translateY(-8px);
+  visibility: hidden;
+  transition: opacity 250ms var(--it-ease), transform 350ms var(--it-ease), visibility 0s 350ms;
+
+  a:not(.btn) {
+    padding: 0.9rem 0.25rem;
+    border-bottom: 1px solid var(--it-borde);
+    color: var(--it-tinta);
+    font-size: 1.15rem;
+    font-weight: 600;
+    text-decoration: none;
   }
-
-nav button {
-  flex-shrink: 1;
-  min-width: 80px;
+  .btn { margin-top: 0.75rem; }
 }
+.menu-movil.abierto {
+  opacity: 1;
+  transform: none;
+  visibility: visible;
+  transition: opacity 250ms var(--it-ease), transform 350ms var(--it-ease), visibility 0s;
+}
+
+@media (min-width: 992px) {
+  .enlaces { display: flex; }
+  .boton-pedido { display: inline-flex; }
+  .menu-boton, .menu-movil { display: none; }
+}
+
+@media (max-width: 380px) {
+  .marca-sub { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .barra, .menu-movil, .menu-movil.abierto { transition: none; }
+  .marca img { animation: none; transition: none; }
 }

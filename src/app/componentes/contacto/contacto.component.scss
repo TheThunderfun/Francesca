@@ -1,71 +1,14 @@
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-@keyframes fadeOut {
-  from { opacity: 1; }
-  to { opacity: 0; }
-}
-@keyframes zoomIn {
-  from { transform: scale(0.8); opacity: 0; }
-  to { transform: scale(1); opacity: 1; }
-}
-@keyframes zoomOut {
-  from { transform: scale(1); opacity: 1; }
-  to { transform: scale(0.8); opacity: 0; }
-}
+.cierre { background: var(--it-verde-noche); text-align: center; }
+.cierre-contenido { display: flex; flex-direction: column; align-items: center; }
 
-.contacto-overlay {
-  position: fixed;
-  top: 0; left: 0;
-  z-index: 1050;
-  width: 100%; height: 100%;
-  background-color: rgba(0,0,0,0.5);
-  display: flex; justify-content: center; align-items: center;
-  padding: 1rem;
+.cierre-titulo {
+  margin: 0 0 1rem;
+  max-width: 14ch;
+  font-size: clamp(2.5rem, 8vw, 5rem);
+  line-height: 1.05;
+  color: #fff;
 }
-
-.fade-in {
-  animation: fadeIn 0.3s forwards;
-}
-.fade-out {
-  animation: fadeOut 0.3s forwards;
-}
-
-.contacto-card {
-  background: white;
-  border-radius: 1rem;
-  max-width: 600px;
-  width: 100%;
-  box-shadow: 0 0 20px rgba(0,0,0,0.3);
-  position: relative;
-}
-
-.zoom-in {
-  animation: zoomIn 0.3s forwards;
-}
-.zoom-out {
-  animation: zoomOut 0.3s forwards;
-}
-
-.cerrar-btn {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  background-color: #dc3545; /* Rojo fuerte */
-  border: none;
-  color: white;
-  font-size: 1.5rem;
-  width: 2.5rem;
-  height: 2.5rem;
-  border-radius: 50%;
-  cursor: pointer;
-  line-height: 1;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-  transition: background-color 0.2s, transform 0.2s;
-
-  &:hover {
-    background-color: #c82333;
-    transform: scale(1.1);
-  }
-}
+.cierre-bajada { max-width: 42ch; margin: 0 0 2rem; color: var(--it-verde-pale); font-size: clamp(1.1rem, 2.4vw, 1.3rem); }
+.cierre-acciones { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.75rem; }
+.cierre-redes { margin: 2rem 0 0; color: var(--it-verde-pale); }
+.cierre-redes a { color: #fff; font-weight: 700; text-underline-offset: 3px; }

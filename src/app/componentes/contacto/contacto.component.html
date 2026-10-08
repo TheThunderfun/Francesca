@@ -1,53 +1,26 @@
-<section
-  *ngIf="mostrar || animandoCerrar"
-  [ngClass]="{
-    'fade-in': mostrar && !animandoCerrar,
-    'fade-out': animandoCerrar
-  }"
-  class="contacto-overlay"
->
-  <div
-    class="contacto-card container text-center p-4 position-relative"
-    [ngClass]="{
-      'zoom-in': mostrar && !animandoCerrar,
-      'zoom-out': animandoCerrar
-    }"
-  >
-    <button class="cerrar-btn" (click)="cerrarContacto()">×</button>
-
-    <h2 class="mb-4 text-danger">Contacto</h2>
-
-    <p class="fs-5">
-      📞 <strong>Teléfono:</strong>
-      <a href="tel:42055330" class="text-decoration-none text-success"
-        >+54 42055330</a
-      >
+<section id="pedido" class="seccion cierre sobre-verde" aria-labelledby="cierre-titulo">
+  <div class="contenedor cierre-contenido">
+    <h2 id="cierre-titulo" class="cierre-titulo reveal">¿Qué pasta llevás hoy?</h2>
+    <p class="cierre-bajada reveal" style="--i: 1">
+      Escribinos o llamanos, contanos qué querés y pasá a buscarlo por el local.
     </p>
-
-    <p class="fs-5">
-      📷 <strong>Instagram:</strong>
-      <a
-        href="https://www.instagram.com/francescapasionporlaspastas/?hl=es"
-        target="_blank"
-        class="text-decoration-none text-danger"
-      >
-        Francesca Fábrica de pastas
+    <div class="cierre-acciones reveal" style="--i: 2">
+      <a class="btn btn-accion btn-lg" [href]="pedido.href" [attr.target]="pedido.esWhatsapp ? '_blank' : null" rel="noopener noreferrer">
+        <app-icono [nombre]="pedido.esWhatsapp ? 'whatsapp' : 'telefono'"></app-icono>
+        {{ pedido.etiquetaLarga }}
       </a>
-    </p>
-
-    <p class="fs-5">
-      🕒 <strong>Horario de atención:</strong>
-      <span class="text-danger">9 a 13 / 17 a 19hs.</span>
-    </p>
-
-    <p class="fs-5">
-      📍 <strong>Dirección:</strong>
-      <button
-        class="btn btn-link p-0 text-danger"
-        (click)="mostrarUbicacion.emit()"
-      >
-        Av. Manuel Belgrano 3311, Sarandí, Provincia de Buenos Aires
-      </button>
+      <!-- Si el pedido ya es una llamada (sin WhatsApp cargado), no se repite el botón. -->
+      @if (pedido.esWhatsapp) {
+        <a class="btn btn-claro btn-lg" [href]="'tel:' + negocio.telefonoLink">
+          <app-icono nombre="telefono"></app-icono> Llamar al {{ negocio.telefonoVisible }}
+        </a>
+      }
+    </div>
+    <p class="cierre-redes reveal" style="--i: 3">
+      También en
+      <a [href]="negocio.instagram" target="_blank" rel="noopener noreferrer">Instagram</a>
+      y
+      <a [href]="negocio.facebook" target="_blank" rel="noopener noreferrer">Facebook</a>.
     </p>
   </div>
 </section>

@@ -1,18 +1,79 @@
 <!DOCTYPE html>
 
-<html lang="es">
+<html lang="es-AR">
   <head>
+    <meta charset="utf-8" />
+    <title>Francesca · Fábrica de pastas frescas en Sarandí</title>
+    <base href="/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Pastas frescas hechas en familia en Sarandí: ravioles, sorrentinos, ñoquis, canelones y más. Av. Manuel Belgrano 3311. Martes a sábado y domingos por la mañana."
+    />
+    <meta name="theme-color" content="#0d2a16" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="es_AR" />
+    <meta property="og:site_name" content="Francesca · Fábrica de pastas" />
+    <meta property="og:title" content="Francesca · Pasta fresca, hecha en familia" />
+    <meta
+      property="og:description"
+      content="Fábrica familiar de pastas en Sarandí. Ravioles, sorrentinos, ñoquis y canelones frescos."
+    />
+    <meta property="og:image" content="https://thethunderfun.github.io/Francesca/assets/hero-pasta-fresca.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Handjet:wght@100..900&family=Italianno&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=Young+Serif&display=swap"
       rel="stylesheet"
     />
-    <meta charset="utf-8" />
-    <title>Francesca</title>
-    <base href="/" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="icon" type="image/x-icon" href='favicon.ico' />
+    <link rel="preload" as="image" href="assets/hero-pasta-fresca.jpg" type="image/jpeg" fetchpriority="high" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FoodEstablishment",
+        "name": "Francesca · Fábrica de pastas",
+        "description": "Fábrica familiar de pastas frescas en Sarandí.",
+        "servesCuisine": "Pastas",
+        "telephone": "+541142055330",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Av. Manuel Belgrano 3311",
+          "addressLocality": "Sarandí",
+          "addressRegion": "Buenos Aires",
+          "postalCode": "B1872FVM",
+          "addressCountry": "AR"
+        },
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+            "opens": "09:00",
+            "closes": "13:00"
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+            "opens": "17:00",
+            "closes": "19:00"
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": "Sunday",
+            "opens": "09:00",
+            "closes": "13:00"
+          }
+        ],
+        "sameAs": [
+          "https://www.instagram.com/francescapasionporlaspastas/",
+          "https://www.facebook.com/profile.php?id=100063466961888"
+        ]
+      }
+    </script>
   </head>
   <body>
     <app-root></app-root>

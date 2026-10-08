@@ -1,26 +1,25 @@
-import { CommonModule } from '@angular/common';
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { NgFor, NgIf } from '@angular/common';
+import { Component, Input } from '@angular/core';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { EstadoLocal, HORARIOS_TABLA, NEGOCIO } from '../../config/negocio';
+import { IconoComponent } from '../icono/icono.component';
 
 @Component({
   selector: 'app-ubicacion',
   standalone: true,
-  imports: [CommonModule],
+  imports: [NgFor, NgIf, IconoComponent],
   templateUrl: './ubicacion.component.html',
   styleUrl: './ubicacion.component.scss',
 })
 export class UbicacionComponent {
-  @Input() mostrar = false;
-  @Output() cerrar = new EventEmitter<void>();
+  @Input() estado?: EstadoLocal;
 
-  animandoCerrar = false;
+  readonly negocio = NEGOCIO;
+  readonly horarios = HORARIOS_TABLA;
+  // La URL sale de nuestra propia configuración, no de la entrada de una persona.
+  readonly mapaSeguro: SafeResourceUrl;
 
-  cerrarUbicacion() {
-    this.animandoCerrar = true;
-    setTimeout(() => {
-      this.cerrar.emit();
-      this.mostrar = false;
-      this.animandoCerrar = false;
-    }, 300); // duración de la animación en ms
-
+  constructor(sanitizer: DomSanitizer) {
+    this.mapaSeguro = sanitizer.bypassSecurityTrustResourceUrl(NEGOCIO.mapaEmbed);
   }
 }

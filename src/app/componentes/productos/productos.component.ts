@@ -1,5 +1,6 @@
-import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { NgFor } from '@angular/common';
+import { Component } from '@angular/core';
+import { IconoComponent } from '../icono/icono.component';
 
 interface ProductoTabla {
   categoria: string;
@@ -8,16 +9,20 @@ interface ProductoTabla {
 
 @Component({
   selector: 'app-productos',
-  imports: [CommonModule],
+  imports: [NgFor, IconoComponent],
   templateUrl: './productos.component.html',
   styleUrl: './productos.component.scss',
 })
 export class ProductosComponent {
-  productos: ProductoTabla[] = [
+  // Cada familia se abre con un toque, para no obligar a un scroll interminable.
+  // En escritorio se abren las primeras tres; el resto, con un toque.
+  readonly escritorio = window.matchMedia('(min-width: 768px)').matches;
+
+  readonly productos: ProductoTabla[] = [
     {
       categoria: 'Ravioles',
       gustos: [
-        'Ricota y jamon',
+        'Ricota y jamón',
         'Ricota y verdura',
         'Ricota y nuez',
         'Ricota y parmesano',
@@ -32,8 +37,8 @@ export class ProductosComponent {
     {
       categoria: 'Canelones',
       gustos: [
-        'Ricota,jamon y muzarella',
-        'Ricota,verdura y muzzarella',
+        'Ricota, jamón y muzzarella',
+        'Ricota, verdura y muzzarella',
         'Ricota y nuez',
         'Pollo y verdura',
         'Especiales de calabaza',
@@ -46,29 +51,29 @@ export class ProductosComponent {
     {
       categoria: 'Agnolottis',
       gustos: [
-        'Jamon y muzarella',
-        'Muzarella al pesto',
-        'Rucula,jamon crudo y muzzarella',
+        'Jamón y muzzarella',
+        'Muzzarella al pesto',
+        'Rúcula, jamón crudo y muzzarella',
       ],
     },
     {
       categoria: 'Lasagna',
-      gustos: ['Ricota y verdura', 'Ricota y jamon', 'Carne'],
+      gustos: ['Ricota y verdura', 'Ricota y jamón', 'Carne'],
     },
     {
       categoria: 'Sorrentinos',
       gustos: [
-        'Ricota,jamon y muzzarella',
-        'Jamon y muzzarella',
+        'Ricota, jamón y muzzarella',
+        'Jamón y muzzarella',
         'Capresse',
-        'Rucula,jamon crudo y muzzarella',
-        'Roquefort,muzzarella y nuez',
+        'Rúcula, jamón crudo y muzzarella',
+        'Roquefort, muzzarella y nuez',
       ],
     },
     {
       categoria: 'Raviolones',
       gustos: [
-        'Pollo y jamon',
+        'Pollo y jamón',
         'Especiales de calabaza',
         'Pollo y verdura',
         'Verdura y muzzarella',
@@ -82,17 +87,17 @@ export class ProductosComponent {
         'Espinaca',
         'Calabaza',
         'Ricota',
-        'De papa rellenos de muzarella',
+        'De papa rellenos de muzzarella',
         'Malfattis de ricota y espinaca',
       ],
     },
-    { categoria: 'Salsa', gustos: ['Fileto', 'Bolognesa', 'Blanca'] },
+    { categoria: 'Salsas', gustos: ['Fileto', 'Bolognesa', 'Blanca'] },
     {
       categoria: 'Especiales por semana',
       gustos: [
         'Raviolones de pollo y panceta',
         'Raviolones de osobuco al malbec',
-        'Raviolones de merlusa al vino blanco ',
+        'Raviolones de merlusa al vino blanco',
         'Sorrentinos napolitanos',
       ],
     },

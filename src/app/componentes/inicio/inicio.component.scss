@@ -1,111 +1,212 @@
-.card-img-top {
-  width: 100%;       /* Ocupa todo el ancho de la card */
-  height: 200px;     /* Altura fija, puedes ajustar */
-  object-fit: cover; /* La imagen se recorta si es necesario, para llenar el área */
-}
-
-.imagenFondo {
-  background-image: url('https://elcordillerano1.cdn.net.ar/252/elcordillerano/images/01/64/70/1647035_02eab78a50a91c3eb8c375d4b171f88cb68eec99f3b66e98022e60843901fe3e/md.webp');
-  background-size: cover;
-  background-position: center;
-  height: 40vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.title{
-  font-family: 'Italianno', cursive;
-  font-size: 8rem;
-  font-weight: bold;
-  color: #fff;  
-  text-shadow: 2px 2px 4px rgba(65, 59, 59, 0.972);
-  text-align: center;
-}
-
-.cerrar-productos {
-  filter: brightness(0.9);
-  transition: filter 0.3s ease, transform 0.2s ease;
-}
-
-.cerrar-productos:hover {
-  filter: brightness(1);
-  transform: scale(1.02);
-}
-
-.fade-in {
-  animation: fadeIn 500ms ease-out;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-
-
-.sticker-aniversario {
-  position: absolute;
-  top: 20px;
-  left: 20px;
-  background-color: #dc3545;
-  color: #fff;
-  font-weight: bold;
-  padding: 10px 20px;
-  border-radius: 50px;
-  font-size: 1rem;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
-  transform: rotate(-10deg);
-  z-index: 10;
-}
-
+/* ---------- HERO ----------
+   Celular: la foto va entera arriba y el texto abajo, sobre verde noche.
+   Nada de texto encima de la pasta: la foto es la protagonista y el
+   contraste del texto no depende de lo que haya detrás. */
 .hero {
-  gap: 2rem;
-  padding-left: 2rem;
+  display: grid;
+  background: var(--it-verde-noche);
+  color: #fff;
 }
-
-
-
-.section-shadow {
-border-top: 12px solid #dc3545;
-
-}
-
-.bg-alt {
-  background-color: #fdf4f5; /* un tono pastel rosado suave */
-}
-
-/* Separador visual entre secciones */
-// .section-divider {
-//   height: 20px;
-//   background: linear-gradient(to right, #e0e0e0 25%, transparent 25%, transparent 75%, #e0e0e0 75%);
-//   background-size: 20px 2px;
-//   background-repeat: repeat-x;
-//   margin-top: -1rem;
-//   margin-bottom: -1rem;
-// }
-
-/* Mejora general a todas las secciones */
-
-
-.badge-logo {
-  max-height: 180px;
-  flex-shrink: 0;
-}
-
-@media (max-width: 576px) {
-  .badge-logo {
-    max-height: 150px;
-    margin: 0 auto 1rem;
+.hero-foto {
+  overflow: hidden;
+  width: 100%;
+  height: clamp(200px, 40svh, 380px);
+  img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 62% 50%;
+    animation: hero-estira 1400ms var(--it-ease) both;
   }
+}
+
+/* ---------- SELLO CON EL LOGO ----------
+   Disco blanco a caballo entre la foto y el panel verde. */
+.hero { position: relative; }
+.sello {
+  position: absolute;
+  z-index: 2;
+  top: clamp(200px, 40svh, 380px);
+  right: 1.25rem;
+  width: 96px;
+  height: 96px;
+  transform: translateY(-68%);
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 10px 24px rgba(13, 42, 22, 0.35);
+  animation: sello-entra 900ms var(--it-ease) 500ms both;
+}
+.sello-anillo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  animation: gira 40s linear infinite;
+  text { font: 700 15px 'Hanken Grotesk', sans-serif; letter-spacing: 0.04em; fill: var(--it-verde-texto); }
+}
+.sello-logo {
+  position: absolute;
+  inset: 27%;
+  width: 46%;
+  height: 46%;
+  border-radius: 50%;
+  animation: logo-vuelta 1400ms var(--it-ease) 800ms both;
+  transition: transform 800ms var(--it-ease);
+}
+.sello:hover .sello-logo { transform: rotate(360deg) scale(1.08); }
+
+/* Celular: sello más chico, sin anillo de texto; el logo queda centrado. */
+@media (max-width: 991.98px) {
+  .sello { width: 72px; height: 72px; }
+  .sello-anillo { display: none; }
+  .sello-logo { inset: 10%; width: 80%; height: 80%; }
+}
+
+@keyframes gira { to { transform: rotate(360deg); } }
+@keyframes sello-entra { from { opacity: 0; transform: translateY(-68%) scale(0.6); } }
+@keyframes logo-vuelta { from { transform: rotate(-270deg) scale(0.5); opacity: 0; } }
+
+@media (min-width: 992px) {
+  .sello { top: auto; bottom: 3rem; right: auto; left: calc(6 / 13 * 100%); width: 148px; height: 148px; transform: translateX(-50%); animation-name: sello-entra-d; }
+  @keyframes sello-entra-d { from { opacity: 0; transform: translateX(-50%) scale(0.6); } }
+}
+.hero-panel { padding: 2.5rem 1.25rem 3.5rem; }
+.hero-contenido { max-width: 34rem; margin-inline: auto; }
+
+.hero-titulo {
+  margin: 0 0 1.1rem;
+  font-size: clamp(2.4rem, 8.5vw, 4.4rem);
+  line-height: 1.04;
+  letter-spacing: -0.02em;
+  color: #fff;
+}
+.hero-bajada {
+  margin: 0 0 1.25rem;
+  max-width: 44ch;
+  font-size: clamp(1.1rem, 2.4vw, 1.3rem);
+  color: var(--it-verde-pale);
+}
+.hero .estado-local { margin-bottom: 1.5rem; }
+.hero-acciones { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+.hero-ver-pastas { margin: 1rem 0 0; }
+.hero-ver-pastas a { color: #fff; text-decoration: underline; }
+
+/* Entrada de la portada: una sola secuencia, escalonada. */
+.hero-titulo, .hero-bajada, .hero .estado-local, .hero-acciones {
+  animation: sube 800ms var(--it-ease) both;
+}
+.hero-titulo { animation-delay: 120ms; }
+.hero-bajada { animation-delay: 260ms; }
+.hero .estado-local { animation-delay: 380ms; }
+.hero-acciones { animation-delay: 480ms; }
+
+@keyframes sube { from { opacity: 0; transform: translateY(22px); } }
+/* La foto se destapa como una lámina de masa que se estira. */
+@keyframes hero-estira { from { clip-path: inset(0 100% 0 0); transform: scale(1.08); } }
+
+@media (min-width: 992px) {
   .hero {
-    padding-left: 1rem;
-    flex-direction: column !important;
+    grid-template-columns: minmax(0, 6fr) minmax(0, 7fr);
+    min-height: min(760px, calc(100svh - 68px));
   }
+  .hero-panel { order: -1; display: flex; align-items: center; padding: 4rem max(2.5rem, 3vw) 4rem max(2.5rem, calc((100vw - 1180px) / 2)); }
+  .hero-contenido { margin: 0; max-width: 31rem; }
+  .hero-foto { height: 100%; }
+}
+
+/* ---------- PASTAS DESTACADAS ---------- */
+.pastas { background: var(--it-papel); }
+.pastas-intro { margin-bottom: clamp(1.5rem, 4vw, 2.5rem); }
+
+.pastas-grilla {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 2rem 1rem;
+}
+.pasta { margin: 0; }
+.pasta:first-child { grid-column: 1 / -1; }
+
+.pasta-foto {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  border-radius: 4px;
+  aspect-ratio: 1;
+  background: var(--it-verde-pale);
+  img { display: block; width: 100%; height: 100%; object-fit: cover; }
+}
+.pasta:first-child .pasta-foto { aspect-ratio: 4 / 3; }
+
+.pasta figcaption { padding-top: 0.9rem; }
+.pasta-nombre { margin: 0 0 0.3rem; font-size: 1.2rem; line-height: 1.2; color: var(--it-verde-texto); }
+.pasta:first-child .pasta-nombre { font-size: clamp(1.5rem, 4vw, 2rem); }
+.pasta-texto { margin: 0; max-width: 46ch; color: var(--it-tinta-2); font-size: 1rem; }
+.pasta-pedir { margin-top: 0.9rem; }
+.pastas-mas { margin: 2rem 0 0; }
+
+@media (min-width: 768px) {
+  .pastas-grilla { grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 2.25rem 1.75rem; }
+  .pasta:nth-child(1) { grid-column: 1 / span 7; }
+  .pasta:nth-child(2) { grid-column: 8 / span 5; align-self: end; }
+  .pasta:nth-child(n + 3) { grid-column: span 4; }
+  .pasta:nth-child(1) .pasta-foto { aspect-ratio: 5 / 4; }
+  .pasta:nth-child(2) .pasta-foto { aspect-ratio: 1; }
+  .pasta:nth-child(n + 3) .pasta-foto { aspect-ratio: 4 / 5; }
+  .pasta:nth-child(n + 3) .pasta-nombre { font-size: 1.25rem; }
+}
+
+/* ---------- NUESTRA HISTORIA ---------- */
+.historia { background: #fff; }
+.historia-grilla { display: grid; gap: 2rem; align-items: center; }
+.historia-foto {
+  margin: 0;
+  overflow: hidden;
+  border-radius: 4px;
+  img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; }
+}
+.historia-parrafo { max-width: 58ch; margin-bottom: 1.5rem; }
+@media (min-width: 992px) {
+  .historia-grilla { grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); gap: clamp(3rem, 7vw, 6rem); }
+  .historia-foto img { aspect-ratio: 1; }
+}
+
+/* ---------- DIFERENCIALES ----------
+   Una lista tipográfica en lugar de tarjetas con ícono: cada hecho
+   es una frase grande y una línea de apoyo, separados por filetes. */
+.diferenciales { background: var(--it-verde-texto); }
+.diferenciales-grilla { display: grid; gap: 2.5rem; }
+.diferenciales .titulo-seccion { color: #fff; max-width: 14ch; }
+.diferenciales-lista { list-style: none; margin: 0; padding: 0; }
+.diferenciales-lista li {
+  padding: 1.5rem 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.35);
+  &:last-child { border-bottom: 1px solid rgba(255, 255, 255, 0.35); }
+}
+.diferencial-titulo { margin: 0 0 0.35rem; font-size: clamp(1.5rem, 3.6vw, 2.1rem); line-height: 1.15; color: #fff; }
+.diferencial-texto { margin: 0; max-width: 52ch; color: #fff; font-size: 1.05rem; }
+@media (min-width: 992px) {
+  .diferenciales-grilla { grid-template-columns: minmax(0, 4fr) minmax(0, 7fr); gap: clamp(3rem, 7vw, 6rem); align-items: start; }
+  .diferenciales .titulo-seccion { position: sticky; top: 7rem; }
+}
+
+/* ---------- BARRA DE ACCIÓN MÓVIL ---------- */
+.barra-movil {
+  position: fixed;
+  inset: auto 0 0 0;
+  z-index: 1020;
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 0.6rem;
+  padding: 0.6rem 0.75rem calc(0.6rem + env(safe-area-inset-bottom));
+  background: #fff;
+  border-top: 1px solid var(--it-borde);
+  box-shadow: 0 -6px 18px rgba(13, 42, 22, 0.1);
+  .btn { min-height: 52px; }
+}
+.barra-movil.barra-simple { grid-template-columns: 1fr; }
+@media (min-width: 768px) { .barra-movil { display: none; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-foto img, .hero-titulo, .hero-bajada, .hero .estado-local, .hero-acciones, .sello, .sello-anillo, .sello-logo { animation: none; }
 }
