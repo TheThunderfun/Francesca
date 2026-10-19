@@ -101,6 +101,8 @@ export class ProductosComponent {
         'Raviolones de osobuco al malbec',
         'Raviolones de merlusa al vino blanco',
         'Sorrentinos napolitanos',
+        'Sorrentinos de provoleta',
+        'Raviolones de bondiola a la cerveza negra',
       ],
     },
   ];
